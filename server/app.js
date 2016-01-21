@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -13,6 +15,24 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, '../client/public/views'));
 app.set('view engine', 'jade');
+
+//DATABASE CONNECTIONS
+//build the connection string
+var dbURI = 'mongodb://localhost:27017/volunteerApp';
+//Create database connection
+mongoose.connect(dbURI);
+//When successfully connected
+mongoose.connection.on('connected', function() {
+  console.log('Mongoose default connection open to ' + dbURI);
+});
+//If the connection throws an error
+mongoose.connection.on('error', function(err) {
+  console.log('Mongoose default connection error: ' + err);
+});
+//When the connection is disconnected
+mongoose.connection.on('disconnected', function() {
+  console.log('Mongoose default connection disconnected');
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
