@@ -9,12 +9,12 @@ var Volunteers = require('volunteers');
 //creates a schema to standardize Shift creation
 
 var ShiftSchema = new mongoose.Schema ({
-    name: String,
-    timeStart: Number,
-    timeEnd: Number,
-    slotsAvailabl: Number,
-    slotsUsed: Number,
-    task_id: String,
+    name: {String, required: true},
+    timeStart: {Number, required: true},
+    timeEnd: {Number, required: true},
+    slotsAvailabl: {Number, required: true},
+    slotsUsed: {Number, required: true},
+    task_id: {String, required: true}
 });
 
 module.exports = mongoose.model('Shift', ShiftSchema);
