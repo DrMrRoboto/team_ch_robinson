@@ -9,14 +9,13 @@ var Volunteers = require('volunteers');
 //creates a schema to standardize Event creation
 
 var EventSchema = new mongoose.Schema ({
-    name: String,
-    description: String,
-    startDate: Date,
-    endDate: Date,
-    //need to figure out time schema.
-    startTime: Number,
-    endTime: Number,
-    host: String
+    name: {String, required: true},
+    description: {String, required: true},
+    startDate: {Date, required: true},
+    endDate: {Date, required: true},
+    startTime: {Number, required: true},
+    endTime: {Number, required: true},
+    host: {String, required: true}
 });
 
 //Deletes Event and all associated Categories and Items
