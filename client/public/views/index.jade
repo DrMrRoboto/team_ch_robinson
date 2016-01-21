@@ -2,10 +2,13 @@ extends layout
 
 block content
   header
-    h1 "C.H. Robinson"
-    h2 "Volunteer App"
+    h1 C.H. Robinson
+    h2 Volunteer App
     .nav
       ul
-        li "home"
-        li "admin"
+        li
+          a(href='/#/') home
+        li
+          a(href='/#/adminCal') admin
 
+    .main(ng-view)
