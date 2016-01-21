@@ -18,4 +18,15 @@ var VolunteerSchema = new mongoose.Schema ({
     shift_id: {String, required: true}
 });
 
+// Deletes Volunteers
+VolunteerSchema.statics.delete = function(id, callback){
+    this.findById(id, function(err, result){
+        if (err) {
+            callback(err);
+        } else if (result != undefined){
+            result.remove(callback)
+        }
+    });
+};
+
 module.exports = mongoose.model('Volunteer', VolunteerSchema);

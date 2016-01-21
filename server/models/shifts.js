@@ -17,4 +17,23 @@ var ShiftSchema = new mongoose.Schema ({
     task_id: {String, required: true}
 });
 
+// Deletes Shifts and all associated Items
+
+ShiftSchema.statics.delete = function(id, callback){
+    this.findById(id, function(err, result){
+        if (err) {
+            callback(err);
+        } else if (result != undefined){
+            result.remove(callback);
+        }
+    });
+    Volunteer.remove({categoryID: id}, function(err){
+        if(err) {
+            callback(err);
+        } else if (!err) {
+            callback()
+        }
+    })
+};
+
 module.exports = mongoose.model('Shift', ShiftSchema);
