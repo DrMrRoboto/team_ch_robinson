@@ -6,7 +6,7 @@ var Tasks = require('tasks');
 var Shifts = require('shifts');
 var Volunteers = require('volunteers');
 
-//creats a schema to standardize Event creation
+//creates a schema to standardize Event creation
 
 var EventSchema = new mongoose.Schema ({
     name: String,
@@ -14,8 +14,8 @@ var EventSchema = new mongoose.Schema ({
     startDate: Date,
     endDate: Date,
     //need to figure out time schema.
-    startTime: ,
-    endTime: ,
+    startTime: Number,
+    endTime: Number,
     host: String
 });
 
