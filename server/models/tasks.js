@@ -9,9 +9,9 @@ var Volunteers = require('volunteers');
 //creates a schema to standardize Task creation
 
 var TaskSchema = new mongoose.Schema ({
-    name: String,
-    description: String,
-    event_id: String
+    name: {String, required: true},
+    description: {String, required: true},
+    event_id: {String, required: true}
 
 });
 
