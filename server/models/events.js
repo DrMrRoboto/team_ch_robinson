@@ -19,16 +19,32 @@ var EventSchema = new mongoose.Schema ({
 });
 
 //Deletes Event and all associated Categories and Items
-//
-//EventSchema.statics.delete = function(id, callback){
-//    //Deletes the Event using the Event id
-//    this.findById(id, function(err, data){
-//        if(err) {
-//            callback(err);
-//        } else if (result != undefined){
-//
-//        }
-//    })
-//}
+
+EventSchema.statics.delete = function(id, callback){
+    //Deletes the Event using the Event id
+    this.findById(id, function(err, data){
+        if(err) {
+            callback(err);
+        } else if (result != undefined){
+            result.remove(callback);
+        }
+    });
+    //Deletes all associated Tasks, Shifts, and Volunteers by using Category.delete method
+    Task.find({eventID: id}, function(err, data){
+        if(err) {
+            callback(err);
+        } else if (data) {
+            data.forEach(function(record){
+                console.log(record._id);
+                var ID = record._id;
+                Task.delete(ID, function(err){
+                    if(err) {
+                        callback(err);
+                    }
+                })
+            });
+        }
+    });
+};
 
 module.exports = mongoose.model('Event', EventSchema);
