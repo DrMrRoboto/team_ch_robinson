@@ -15,7 +15,7 @@ router.get('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	var newTask = req.body;
 
-	if(newEvent.name != undefined) {
+	if(newTask.name != undefined) {
 		Task.create(newTask, function (err, data) {
 			res.send(data);
 		});
