@@ -2,10 +2,16 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet' href='vendors/bootstrap/bootstrap.css')
+    link(rel='stylesheet' href='vendors/bootstrap/dist/css/bootstrap.css')
     script(src='vendors/angular/angular.min.js')
-  body
+    script(src='vendors/angular-route/angular-route.min.js')
+  body(ng-app='chrCalendarApp')
     block content
 
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src='/javascripts/app.js')
+    link(rel='stylesheet', href='stylesheets/style.css')
+    script(src='javascripts/app.js')
+    script(src='javascripts/controllers/adminCal.js')
+    script(src='javascripts/controllers/adminEvent.js')
+    script(src='javascripts/controllers/userCal.js')
+    script(src='javascripts/controllers/userEvent.js')
+    script(src='javascripts/controllers/volunteerList.js')
