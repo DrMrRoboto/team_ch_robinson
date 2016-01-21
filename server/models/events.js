@@ -13,6 +13,7 @@ var EventSchema = new mongoose.Schema ({
     description: String,
     startDate: Date,
     endDate: Date,
+    //need to figure out time schema.
     startTime: ,
     endTime: ,
     host: String
