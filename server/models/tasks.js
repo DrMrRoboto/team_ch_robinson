@@ -8,7 +8,7 @@ var Volunteers = require('volunteers');
 
 //creates a schema to standardize Task creation
 
-var TaskSchema = new.mongoose.Schema ({
+var TaskSchema = new mongoose.Schema ({
     name: String,
     description: String,
     event_id: String
