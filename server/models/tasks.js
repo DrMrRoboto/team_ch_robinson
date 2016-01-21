@@ -14,7 +14,7 @@ var TaskSchema = new mongoose.Schema ({
     event_id: {String, required: true}
 });
 
-// Deletes Task and all associated Items
+// Deletes Tasks and all associated Items
 
 TaskSchema.statics.delete = function(id, callback){
     this.findById(id, function(err, result){
