@@ -1,0 +1,28 @@
+var app = angular.module('chrCalendarApp', ['ngRoute']);
+
+app.config(function($routeProvider){
+  $routeProvider
+    .when('/',{
+      controller: 'userCal',
+      templateUrl: 'views/templates/userCal.html'
+    })
+    .when('/userEvent',{
+      controller: 'userEvent',
+      templateUrl: 'views/templates/userEvent.html'
+    })
+    .when('/adminCal', {
+      controller: 'adminCal',
+      templateUrl: 'views/templates/adminCal.html'
+    })
+    .when('/adminEvent',{
+      controller: 'adminEvent',
+      templateUrl: 'views/templates/adminEvent.html'
+    })
+    .when('/volunteerList',{
+      controller: 'volunteerList',
+      templateUrl: 'views/templates/volunteerList.html'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+});
