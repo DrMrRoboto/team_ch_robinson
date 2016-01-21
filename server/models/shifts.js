@@ -14,7 +14,7 @@ var ShiftSchema = new mongoose.Schema ({
     timeEnd: Number,
     slotsAvailabl: Number,
     slotsUsed: Number,
-    task_id: String
+    task_id: String,
 });
 
 module.exports = mongoose.model('Shift', ShiftSchema);
