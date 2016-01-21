@@ -19,8 +19,8 @@ router.get('/:id', function(req, res, next) {
 
 });
 
-/*POST new Collection*/
-router.post('/:id', function(req, res, next) {
+/*POST new Event*/
+router.post('/', function(req, res, next) {
 	var newEvent = req.body;
 
 	if(newEvent.name != undefined) {
@@ -31,7 +31,7 @@ router.post('/:id', function(req, res, next) {
 
 });
 
-/*Update Collection Name*/
+/*Update Event*/
 router.put('/:id', function(req, res, next) {
 	var eventID = req.params.id;
 	var event = req.body;
@@ -40,7 +40,7 @@ router.put('/:id', function(req, res, next) {
 	});
 });
 
-/*DELETE Collection*/
+/*DELETE Event*/
 router.delete('/:id', function(req, res, next) {
 	var ID = req.params.id;
 	Event.delete(ID, function(err){
