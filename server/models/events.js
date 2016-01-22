@@ -12,8 +12,6 @@ var EventSchema = new mongoose.Schema ({
     description: {type: String, required: true},
     startDate: {type: Date, required: true},
     endDate: {type: Date, required: true},
-    startTime: {type: Number, required: true},
-    endTime: {type: Number, required: true},
     host: {type: String, required: true}
 });
 
