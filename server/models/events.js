@@ -18,7 +18,7 @@ var EventSchema = new mongoose.Schema ({
 //Deletes Event and all associated Categories and Items
 EventSchema.statics.delete = function(id, callback){
     //Deletes the Event using the Event id
-    this.findById(id, function(err, data){
+    this.findById(id, function(err, result){
         if(err) {
             callback(err);
         } else if (result != undefined){
