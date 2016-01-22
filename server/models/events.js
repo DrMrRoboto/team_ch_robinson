@@ -2,12 +2,11 @@
  * Created by Totep on 1/21/16.
  */
 var mongoose = require('mongoose');
-var Tasks = require('./tasks');
-var Shifts = require('./shifts');
-var Volunteers = require('./volunteers');
+var Task = require('./tasks');
+var Shift = require('./shifts');
+var Volunteer = require('./volunteers');
 
 //creates a schema to standardize Event creation
-
 var EventSchema = new mongoose.Schema ({
     name: {type: String, required: true},
     description: {type: String, required: true},
@@ -19,7 +18,6 @@ var EventSchema = new mongoose.Schema ({
 });
 
 //Deletes Event and all associated Categories and Items
-
 EventSchema.statics.delete = function(id, callback){
     //Deletes the Event using the Event id
     this.findById(id, function(err, data){
@@ -29,8 +27,8 @@ EventSchema.statics.delete = function(id, callback){
             result.remove(callback);
         }
     });
-    //Deletes all associated Tasks, Shifts, and Volunteers by using Category.delete method
-    Tasks.find({event_id: id}, function(err, data){
+    //Deletes all associated Tasks, Shifts, and Volunteers by using Task.delete method
+    Task.find({event_id: id}, function(err, data){
         if(err) {
             callback(err);
         } else if (data) {
