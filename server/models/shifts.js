@@ -8,7 +8,6 @@ var Volunteer = require('./volunteers');
 
 //creates a schema to standardize Shift creation
 var ShiftSchema = new mongoose.Schema ({
-    name: {type: String, required: true},
     startDate: {type: Date, required: true},
     endDate: {type: Date, required: true},
     slotsAvailable: {type: Number, required: true},
