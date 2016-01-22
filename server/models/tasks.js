@@ -16,7 +16,7 @@ var TaskSchema = new mongoose.Schema ({
 // Deletes Tasks and all associated Shifts and Volunteers
 TaskSchema.statics.delete = function(id, callback){
     //Deletes the Task using the Task id
-    this.findById(id, function(err, data){
+    this.findById(id, function(err, result){
         if(err) {
             callback(err);
         } else if (result != undefined){

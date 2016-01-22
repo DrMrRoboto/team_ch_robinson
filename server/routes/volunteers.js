@@ -15,7 +15,7 @@ router.get('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	var newVolunteer = req.body;
 
-	if(newVolunteer.name != undefined) {
+	if(newVolunteer.firstName != undefined) {
 		Volunteer.create(newVolunteer, function (err, data) {
 			res.send(data);
 		});
