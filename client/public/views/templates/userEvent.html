@@ -1,3 +1,109 @@
 <div>
-  <p>This is a user event</p>
+	<p>Event Name: {{event.name}}</p>
+
+	<p>Event Time: {{event.startTime}} - {{event.endTime}}</p>
+
+	<p>Event Description</p>
+
+	<p>{{event.description}}</p>
 </div>
+<div>
+	<table class="table table-bordered">
+		<tr>
+			<th>Task</th>
+			<th>Shift Time</th>
+			<th>Slots</th>
+			<th>Registered</th>
+			<th>Sign-Up</th>
+		</tr>
+		<tr>
+			<td>{{task.name}}</td>
+			<td>{{shift.startTime}} - {{shift.endTime}}</td>
+			<td>{{shift.slotsAvailable - shift.slotsUsed}}</td>
+			<td>{{volunteer.firstName}} {{volunteer.lastName}}</td>
+			<td>
+				<button class="btn btn-default" data-toggle="modal" data-target="#signup">Sign-Up</button>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div id="signup" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Volunteer Sign-Up</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="volunteerFirstName">First Name</label>
+						<input type="text" id="volunteerFirstName" required>
+					</div>
+					<div class="form-group">
+						<label for="volunteerLastName">Last Name</label>
+						<input type="text" id="volunteerLastName"  required>
+					</div>
+					<div class="form-group">
+						<label for="volunteerEmail">Email</label>
+						<input type="email" id="volunteerEmail" required>
+					</div>
+					<div class="form-group">
+						<label for="volunteerPhone">Phone Number</label>
+						<input type="tel" id="volunteerPhone">
+					</div>
+					<div class="form-group">
+						<label for="volShirtSize">Shirt Size</label>
+						<select name="volShirtSize" id="volShirtSize">
+							<option>Men Small</option>
+							<option>Men Medium</option>
+							<option>Men Large</option>
+							<option>Men XL</option>
+							<option>Men XXL</option>
+							<option>Men XXXL</option>
+							<option>Women Small</option>
+							<option>Women Medium</option>
+							<option>Women Large</option>
+							<option>Women XL</option>
+							<option>Women XXL</option>
+							<option>Women XXXL</option>
+							<option>Child Small</option>
+							<option>Child Medium</option>
+							<option>Child Large</option>
+						</select>
+					</div>
+					<hr>
+					<div class="form-group">
+						<label for="guestName">Guest Name</label>
+						<input type="text" id="guestName">
+						<label for="guestShirtSize">Shirt Size</label>
+						<select name="guestShirtSize" id="guestShirtSize">
+							<option>Men Small</option>
+							<option>Men Medium</option>
+							<option>Men Large</option>
+							<option>Men XL</option>
+							<option>Men XXL</option>
+							<option>Men XXXL</option>
+							<option>Women Small</option>
+							<option>Women Medium</option>
+							<option>Women Large</option>
+							<option>Women XL</option>
+							<option>Women XXL</option>
+							<option>Women XXXL</option>
+							<option>Child Small</option>
+							<option>Child Medium</option>
+							<option>Child Large</option>
+						</select>
+						<button class="btn btn-default">Add Guest</button>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+

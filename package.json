@@ -17,6 +17,7 @@
     "grunt": "^0.4.5",
     "grunt-contrib-copy": "^0.8.2",
     "jade": "~1.11.0",
+    "jquery": "^2.2.0",
     "kerberos": "0.0.18",
     "mongodb": "^2.1.4",
     "mongoose": "^4.3.6",
