@@ -7,8 +7,22 @@ block content
     .nav
       ul
         li
-          a(href='/#/') home
-        li
-          a(href='/#/adminCal') admin
+          a(href='/#/') Home
+        li.dropdown(role="presentation").pull-right
+          a.dropdown-toggle(data-toggle="dropdown", href="/#/", role="button", aria-haspopup="true", aria-expanded="false")
+            | Admin
+            span.caret
+          form.dropdown-menu
+            fieldset.form-group
+              label(for="exampleInputEmail1") Email address
+              input#exampleInputEmail1.form-control(type="email", placeholder="Enter email")
+            fieldset.form-group
+              label(for="exampleInputPassword1") Password
+              input#exampleInputPassword1.form-control(type="password", placeholder="Password")
+            .checkbox
+              label
+                input(type="checkbox")
+                | Remember Me
+              button.btn.btn-primary(type="submit") Submit
+  .main(ng-view)
 
-    .main(ng-view)
