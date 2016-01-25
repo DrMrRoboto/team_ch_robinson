@@ -1,0 +1,11 @@
+<div class="cal-month-day">
+  <span
+    class="pull-right"
+    data-cal-date
+    ng-bind="day.label">
+
+  </span>
+  <a ng-repeat="event in day.events"
+    href="/#/{{event.id}}">{{event.title}}<br>
+  </a>
+</div>
