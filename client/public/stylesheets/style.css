@@ -18,12 +18,32 @@ a {
     margin-right: 0;
     padding-bottom: 20px;
 }
+.admin-event-cal {
+  float: left;
+  width: 80%;
+  margin-right: 0;
+  padding-bottom: 20px;
+}
 
 .user-event-list {
     float: right;
     width: 15%;
     height: 100%;
     padding: 5px;
+}
+
+.admin-future-list {
+  float: right;
+  width: 15%;
+  height: 100%;
+  padding: 5px;
+}
+
+.admin-past-list {
+  float: right;
+  width: 15%;
+  height: 100%;
+  padding: 5px;
 }
 
 .event-list {
