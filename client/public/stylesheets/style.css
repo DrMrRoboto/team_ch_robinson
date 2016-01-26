@@ -11,3 +11,18 @@ a {
   float: right;
   margin: 5px;
 }
+
+.dropdown-menu {
+  width: 300px;
+}
+
+.form-group {
+  padding-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-b
+}
+
+.checkbox-pass {
+  padding-left: 10%;
+}
