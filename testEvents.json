@@ -1,59 +1,58 @@
 [
   {
-    "name": "Popcorn Friday",
-    "description": "Let's eat popcorn! All proceeds go to United Way",
-    "startDate": "2016-01-15T14:00:00",
-    "endDate":"2016-01-15T15:00:00",
+    "title": "Event 1",
+    "description": "This is a description",
+    "startsAt": "2016-01-15T14:00:00",
+    "endsAt":"2016-01-15T15:00:00",
     "host": "CHAMPS"
   },
   {
-    "name": "Event 2",
+    "title": "Event 2",
     "description": "Described",
-    "startDate": "2016-01-12T11:00:00",
-    "endDate":"2016-01-15T14:00:00",
+    "startsAt": "2016-01-12T11:00:00",
+    "endsAt":"2016-01-15T14:00:00",
     "host": "CHAMPS"
   },
   {
-    "name": "Event 3",
-    "description": "This is a description",
-    "startDate": "2016-01-15T11:00:00",
-    "endDate":"2016-01-15T14:00:00",
+    "title": "Event 3",
+    "description": "This was a description",
+    "startsAt": "2016-01-19T11:00:00",
+    "endsAt":"2016-01-19T14:00:00",
     "host": "CHAMPS"
   },
   {
-    "name": "Event 1",
-    "description": "This is a description",
-    "startDate": "2016-01-15T11:00:00",
-    "endDate":"2016-01-15T14:00:00",
+    "title": "Event 4",
+    "description": "This are description",
+    "startsAt": "2016-01-20T11:00:00",
+    "endsAt":"2016-01-20T14:00:00",
     "host": "CHAMPS"
   },
   {
-    "name": "Event 1",
-    "description": "This is a description",
-    "startDate": "2016-01-15T11:00:00",
-    "endDate":"2016-01-15T14:00:00",
+    "title": "Event 5",
+    "description": "Yet another description",
+    "startsAt": "2016-01-21T13:00:00",
+    "endsAt":"2016-01-22T14:00:00",
     "host": "CHAMPS"
   },
   {
-    "name": "Event 1",
-    "description": "This is a description",
-    "startDate": "2016-01-15T11:00:00",
-    "endDate":"2016-01-15T14:00:00",
+    "title": "Event 6",
+    "description": "Not another description",
+    "startsAt": "2016-01-22T10:00:00",
+    "endsAt":"2016-01-22T12:00:00",
     "host": "CHAMPS"
   },
   {
-    "name": "Event 1",
-    "description": "This is a description",
-    "startDate": "2016-01-15T11:00:00",
-    "endDate":"2016-01-15T14:00:00",
+    "title": "Event 7",
+    "description": "Describeth thee!",
+    "startsAt": "2016-01-25T11:00:00",
+    "endsAt":"2016-01-25T14:00:00",
     "host": "CHAMPS"
   },
   {
-    "name": "Event 1",
-    "description": "This is a description",
-    "startDate": "2016-01-15T11:00:00",
-    "endDate":"2016-01-15T14:00:00",
+    "title": "Event 8",
+    "description": "I am Jack's description",
+    "startsAt": "2016-01-25T11:00:00",
+    "endsAt":"2016-01-29T14:00:00",
     "host": "CHAMPS"
-  },
-
+  }
 ]
