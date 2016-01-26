@@ -1,0 +1,59 @@
+[
+  {
+    "name": "Popcorn Friday",
+    "description": "Let's eat popcorn! All proceeds go to United Way",
+    "startDate": "2016-01-15T14:00:00",
+    "endDate":"2016-01-15T15:00:00",
+    "host": "CHAMPS"
+  },
+  {
+    "name": "Event 2",
+    "description": "Described",
+    "startDate": "2016-01-12T11:00:00",
+    "endDate":"2016-01-15T14:00:00",
+    "host": "CHAMPS"
+  },
+  {
+    "name": "Event 3",
+    "description": "This is a description",
+    "startDate": "2016-01-15T11:00:00",
+    "endDate":"2016-01-15T14:00:00",
+    "host": "CHAMPS"
+  },
+  {
+    "name": "Event 1",
+    "description": "This is a description",
+    "startDate": "2016-01-15T11:00:00",
+    "endDate":"2016-01-15T14:00:00",
+    "host": "CHAMPS"
+  },
+  {
+    "name": "Event 1",
+    "description": "This is a description",
+    "startDate": "2016-01-15T11:00:00",
+    "endDate":"2016-01-15T14:00:00",
+    "host": "CHAMPS"
+  },
+  {
+    "name": "Event 1",
+    "description": "This is a description",
+    "startDate": "2016-01-15T11:00:00",
+    "endDate":"2016-01-15T14:00:00",
+    "host": "CHAMPS"
+  },
+  {
+    "name": "Event 1",
+    "description": "This is a description",
+    "startDate": "2016-01-15T11:00:00",
+    "endDate":"2016-01-15T14:00:00",
+    "host": "CHAMPS"
+  },
+  {
+    "name": "Event 1",
+    "description": "This is a description",
+    "startDate": "2016-01-15T11:00:00",
+    "endDate":"2016-01-15T14:00:00",
+    "host": "CHAMPS"
+  },
+
+]
