@@ -28,4 +28,20 @@ a {
 
 .event-list {
     list-style: none;
+  float: right;
+  margin: 5px;
+}
+
+.dropdown-menu {
+  width: 300px;
+}
+
+.form-group {
+  padding-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.checkbox-pass {
+  padding-left: 10%;
 }
