@@ -1,3 +1,37 @@
 <div>
-  <p>This is an admin event</p>
+  <form name="adminEventForm">
+    <label for="eventHostDropDown">Event Host</label>
+    <select name="eventHostDropDown">
+      <option value="Host1"></option>
+      <option value="Host1"></option>
+    </select>
+    Event Name: <input type="text" name="eventName">
+    <p ng-controller="adminEvent" class="input-group">
+      <input type="text" class="form-control" datetime-picker="dd MMM yyyy HH:mm" ng-model="myDate" is-open="isOpen"  />
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="openCalendar($event, prop)"><i class="fa fa-calendar"></i></button>
+      </span>
+    </p>
+    <p ng-controller="adminEvent" class="input-group">
+      <input type="text" class="form-control" datetime-picker="dd MMM yyyy HH:mm" ng-model="myDate" is-open="isOpen"  />
+      <span class="input-group-btn">
+        <span class="glyphicon glyphicon-calendar"></span>
+        <button type="button" class="btn btn-default" ng-click="openCalendar($event, prop)"><i class="fa fa-calendar"></i></button>
+      </span>
+    </p>    Event Description: <input type="text" name="eventDescription">
+  </form>
+</div>
+<div>
+  <button type="button">Save</button>
+  <button type="button">Copy</button>
+  <button type="button">Delete</button>
+</div>
+<div>
+  Tasks <button type="button">New Task</button>
+</div>
+<div>
+  <p>Task Name</p>
+  <p>Task Description</p>
+  <button type="button">Edit</button>
+  <button type="button">Shifts</button>
 </div>
