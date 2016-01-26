@@ -1,5 +1,5 @@
 <div>
-  <h2 class="text-center">{{viewTitle}}</h2>
+	<h2 class="text-center">{{viewTitle}}</h2>
 
   <div class ="row">
     <div class="col-md-6 text-center">
@@ -27,17 +27,26 @@
           Next
         </button>
 
+			</div>
+		</div>
+	</div>
 
-      </div>
-    </div>
-  </div>
+	<br>
 
-  <br>
-
-  <mwl-calendar
-    events="eventData"
-    view="view"
-    view-date="viewDate"
-    view-title="viewTitle">
-  </mwl-calendar>
+	<div>
+		<div class="user-event-cal">
+			<mwl-calendar
+				events="eventData"
+				view="view"
+				view-date="viewDate"
+				view-title="viewTitle">
+			</mwl-calendar>
+		</div>
+		<div class="user-event-list">
+			<h3>Event List</h3>
+			<div class="list-group">
+				<a class="list-group-item" ng-repeat="event in eventData | limitTo: 10" href="">{{event.title}}</a>
+			</div>
+		</div>
+	</div>
 </div>
