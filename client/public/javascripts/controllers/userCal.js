@@ -1,7 +1,7 @@
 /**
  * Created by chottinger on 1/21/16.
  */
-app.controller('userCal', ['$scope','moment', 'calendarConfig',git
+app.controller('userCal', ['$scope','moment', 'calendarConfig',
   function($scope, moment, calendarConfig, eventAjax){
 
   var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
