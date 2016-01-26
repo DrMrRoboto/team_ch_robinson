@@ -1,27 +1,38 @@
 extends layout
 
 block content
-  header
-    h1 C.H. Robinson
-    h2 Volunteer App
-    ul.nav.nav-pills
-        li
-          a(href='/#/') Home
-        li.dropdown(role="presentation").pull-right
-          a.dropdown-toggle(data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false")
-            | Admin
-            span.caret
-          form.dropdown-menu
-            fieldset.form-group
-              label(for="exampleInputEmail1") Email address
-              input#exampleInputEmail1.form-control(type="email", placeholder="Enter email")
-            fieldset.form-group
-              label(for="exampleInputPassword1") Password
-              input#exampleInputPassword1.form-control(type="password", placeholder="Password")
-            .checkbox
-              label
-                input(type="checkbox")
-                | Remember Me
-                a.btn.btn-primary(href="/#/adminCal") Submit
-  .main(ng-view)
+	header
+		h1 C.H. Robinson
+		h2 joinUP
+		ul.nav.nav-pills(ng-controller="navCtrl")
+			li
+				a(href='/#/') Home
+			li.dropdown(role="presentation" ng-hide="adminPath()").pull-right
+				a.dropdown-toggle(data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false")
+					| Admin
+					span.caret
+				form.dropdown-menu
+					fieldset.form-group
+						label(for="exampleInputEmail1") Email address
+						input#exampleInputEmail1.form-control(type="email", placeholder="Enter email")
+					fieldset.form-group
+						label(for="exampleInputPassword1") Password
+						input#exampleInputPassword1.form-control(type="password", placeholder="Password")
+					.checkbox-pass
+						label
+							input(type="checkbox")
+							| Remember Me
+							br
+							a.btn.btn-primary(href="/#/adminCal") Submit
+			li.pull-right
+				a(href='/#/' ng-show="adminPath()") Logout
+		hr
+		ul.nav.nav-pills(ng-controller="navCtrl" ng-show="adminPath()")
+			li
+				a(href='/#/adminEvent') Create Event
+			li.pull-right
+				form.navbar-form
+					input.form-control(type="search")
+					button.btn.btn-default(type="submit") Search
+	.main(ng-view)
 
