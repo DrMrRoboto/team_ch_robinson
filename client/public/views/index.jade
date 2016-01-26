@@ -26,5 +26,13 @@ block content
                 a.btn.btn-primary(href="/#/adminCal") Submit
         li.pull-right
           a(href='/#/' ng-show="adminPath()") Logout
+    hr
+    ul.nav.nav-pills(ng-controller="navCtrl" ng-show="adminPath()")
+      li
+        a(href='/#/adminEvent') Create Event
+      li.pull-right
+        form.navbar-form
+          input.form-control(type="search")
+          button.btn.btn-default(type="submit") Search
   .main(ng-view)
 
