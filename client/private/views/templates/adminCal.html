@@ -42,15 +42,15 @@
       </mwl-calendar>
     </div>
     <div class="admin-future-list">
-      <h3>Event List</h3>
+      <h3>Upcoming Events</h3>
       <div class="list-group">
-        <a class="list-group-item" ng-repeat="event in eventData | limitTo: 10" href="">{{event.title}}</a>
+        <a class="list-group-item" ng-repeat="event in eventData | limitTo: 5" href="">{{event.title}}</a>
       </div>
     </div>
     <div class="admin-past-list">
-      <h3>Event List</h3>
+      <h3>Past Events</h3>
       <div class="list-group">
-        <a class="list-group-item" ng-repeat="event in eventData | limitTo: 10" href="">{{event.title}}</a>
+        <a class="list-group-item" ng-repeat="event in eventData | limitTo: 5" href="">{{event.title}}</a>
       </div>
     </div>
   </div>
