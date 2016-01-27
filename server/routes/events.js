@@ -23,7 +23,7 @@ router.get('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	var newEvent = req.body;
 
-	if(newEvent.name != undefined) {
+	if(newEvent.title != undefined) {
 		Event.create(newEvent, function (err, data) {
 			res.send(data);
 		});
