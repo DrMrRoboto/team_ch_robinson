@@ -3,28 +3,30 @@
  */
 app.controller('adminEvent',['$scope',function($scope){
 
-    $scope.mydate='';
+    $scope.event = {
+        title: "",
+        startsAt: "",
+        endsAt: "",
+        description: "",
+        host: ""
+    }
 
-    $scope.isOpen = false;
 
-    $scope.openCalendar = function(e) {
+    $scope.startAtOpen = false;
+    $scope.endAtOpen = false;
+
+    $scope.openStartAt = function(e) {
         e.preventDefault();
         e.stopPropagation();
 
-        $scope.isOpen = true;
+        $scope.startAtOpen = true;
+    };
+    $scope.openEndAt = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $scope.endAtOpen = true;
     };
 
 }]);
 
-//app.controller('adminEvent',['$scope',function($scope){
-//
-//    $scope.isOpen = false;
-//
-//    $scope.openCalendar = function(e) {
-//        e.preventDefault();
-//        e.stopPropagation();
-//
-//        $scope.isOpen = true;
-//    };
-//
-//}]);
