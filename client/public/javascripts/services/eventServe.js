@@ -1,5 +1,5 @@
 /**
- * Created by chottinger on 1/26/16.
+ * Service for all asynchronous requests for event data
  */
 app.factory('eventServe',['$http',function($http){
 
