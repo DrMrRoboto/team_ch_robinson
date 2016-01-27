@@ -1,7 +1,8 @@
 /**
  * Created by chottinger on 1/21/16.
  */
-app.controller('adminEvent',['$scope',function($scope){
+app.controller('adminEvent',['$scope','eventServe', 'taskServe', 'shiftServe',
+    function($scope, eventServe, taskServe, shiftServe){
 
     $scope.event = {
         title: "",
@@ -27,6 +28,10 @@ app.controller('adminEvent',['$scope',function($scope){
 
         $scope.endAtOpen = true;
     };
+
+    $scope.saveEvent = function (){
+        eventServe.createEvent($scope.event);
+    }
 
 }]);
 
