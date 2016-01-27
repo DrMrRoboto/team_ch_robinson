@@ -2,6 +2,8 @@
  * Created by chottinger on 1/26/16.
  */
 app.factory('eventServe',['$http',function($http){
+
+
   return {
     /**
      * Gets single event from database
@@ -38,6 +40,56 @@ app.factory('eventServe',['$http',function($http){
       }, function(errorResponse){
         return errorResponse.data
       });
+    },
+    /**
+     * Sends new event to be posted to the database
+     * @param newEvent
+     * @returns $http promise object
+     */
+    createEvent: function(newEvent){
+      return $http({
+        method:'post',
+        data: newEvent,
+        url: '/events'
+      }).then(function(response){
+        return response.data
+      }, function(errorResponse){
+        return errorResponse.data
+      });
+    },
+    /**
+     * Sends eventId to be updated in database, along with new event to replace current data
+     * @param eventId
+     * @param updatedEvent
+     * @returns $http promise object
+     */
+    updateEvent: function(eventId, updatedEvent){
+      return $http({
+        method: 'put',
+        data: updatedEvent,
+        url: '/events/' + eventId
+      }).then(function(response){
+        return response.data
+      }, function(errorResponse){
+        return errorResponse.data
+      });
+    },
+    /**
+     * Sends eventId to be deleted in database
+     * @param eventId
+     * @returns $http promise object
+     */
+    deleteEvent: function(eventId){
+      return $http({
+        method: 'delete',
+        url: '/events/' + eventId
+      }).then(function(response){
+        return response.data
+      }, function(errorResponse){
+        return errorResponse.data
+      });
     }
+
+
   }
 }]);
