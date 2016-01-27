@@ -20,7 +20,10 @@ module.exports = function(grunt) {
           "angular-animate/angular-animate.min.js",
           "interact.js/dist/interact.min.js",
           "moment/min/moment.min.js",
-          "bootstrap-ui-datetime-picker/dist/datetime-picker.min.js"
+          "bootstrap-ui-datetime-picker/dist/datetime-picker.min.js",
+          "bootstrap/dist/fonts",
+          "bootstrap/dist/js/bootstrap.min.js"
+
         ],
         "dest": "client/public/vendors/"
       }
