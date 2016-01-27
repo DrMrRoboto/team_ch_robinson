@@ -6,8 +6,8 @@
         <div class="input-group">
           <label for="eventHostDropDown">Event Host</label>
           <select class="form-control" name="eventHostDropDown" id="eventHostDropDown" ng-model="event.host">
-            <option value="Host1"></option>
-            <option value="Host1"></option>
+            <option value="CHAMPS">CHAMPS</option>
+            <option value="CHR Cares">CHR Cares</option>
           </select>
         </div>
         <div class="input-group">
@@ -34,11 +34,12 @@
       </form>
     </div>
     <div class="col-md-3">
-      <button class="btn btn-default" type="button">Save</button>
+      <button class="btn btn-default" type="button" ng-click="saveEvent()">Save</button>
       <button class="btn btn-default" type="button">Copy</button>
       <button class="btn btn-default" type="button">Delete</button>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-2">
@@ -122,9 +123,26 @@
               </div>
             </div>
           </div>
-        </div>
+
+  <div ng-show="event._id">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-2">
+        <h3>Tasks</h3>
+        <button class="btn btn-default" type="button">New Task</button>
       </div>
     </div>
-    <div class="col-md-1"></div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="task-dumpling">
+          <h4>Task Name</h4>
+          <p>Task Description</p>
+          <button type="button">Edit</button>
+          <button type="button">Shifts</button>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
   </div>
 </div>

@@ -14,7 +14,7 @@ app.config(function($routeProvider){
       controller: 'adminCal',
       templateUrl: 'views/templates/adminCal.html'
     })
-    .when('/adminEvent',{
+    .when('/adminEvent/:id?',{
       controller: 'adminEvent',
       templateUrl: 'views/templates/adminEvent.html'
     })
