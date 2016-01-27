@@ -14,7 +14,8 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
 	var eventId = req.params.id;
 	Event.find({_id: eventId}, function(err, data){
-		res.send(data);
+		console.log(data);
+		res.send(data[0]);
 	});
 
 });

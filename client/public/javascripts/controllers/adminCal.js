@@ -13,7 +13,7 @@ app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe',
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
 
-    calendarConfig.templates.calendarMonthCell = 'views/templates/test.html';
+    calendarConfig.templates.calendarMonthCell = 'views/templates/adminMonthDayViewTemplate.html';
 
     $scope.view = 'month';
 
