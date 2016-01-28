@@ -7,7 +7,9 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
     if($routeParams.id){
         eventServe.getEvent($routeParams.id).then(function(response){
             $scope.event = response;
-            console.log($scope.event);
+            taskServe.getTasks($routeParams.id).then(function(response){
+                $scope.tasks = response;
+            });
         });
     } else {
         $scope.event = {
@@ -17,7 +19,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
             description: "",
             host: ""
         };
-        console.log($scope.event);
     }
 
 
@@ -48,7 +49,27 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
             });
         }
 
-    }
+    };
+
+    $scope.newTask = {
+        name: '',
+        desc: '',
+        Event_id: $routeParams.id
+    };
+
+    $scope.saveNewTask = function(){
+        taskServe.createTask($scope.newTask).then(function(response){
+            $scope.newTask.name = '';
+            $scope.newTask.desc = '';
+            taskServe.getTasks($routeParams.id).then(function(response){
+                $scope.tasks = response;
+            });
+        });
+    };
+
+    $scope.clearNewTask = function(){
+
+    };
 
 }]);
 

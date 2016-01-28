@@ -8,6 +8,7 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe',
   //sets eventData, but only after $http call in getEvents() is complete
   eventServe.getEvents().then(function(response){
     $scope.eventData = response;
+    console.log($scope.eventData)
   });
 
   var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
