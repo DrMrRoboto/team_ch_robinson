@@ -56,17 +56,17 @@
               <form class="form-horizontal">
                 <div class="form-group form-group-dropdown">
                   <label for="newTaskName">Task Name</label>
-                  <input class="form-control" type="text" id="newTaskName" name="newTaskName" required>
+                  <input class="form-control" type="text" id="newTaskName" name="newTaskName" ng-model="newTask.name" required>
                 </div>
                 <div class="form-group form-group-dropdown">
                   <label for="newTaskDesc">Description</label>
-                  <textarea class="form-control" id="newTaskDesc" name="newTaskDesc" required></textarea>
+                  <textarea class="form-control" id="newTaskDesc" name="newTaskDesc" ng-model="newTask.desc" required></textarea>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveNewTask()">Submit</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearNewTask()">Close</button>
             </div>
           </div>
         </div>
@@ -132,12 +132,12 @@
         <button class="btn btn-default" type="button">New Task</button>
       </div>
     </div>
-    <div class="row">
+    <div class="row" ng-repeat="task in tasks">
       <div class="col-md-1"></div>
       <div class="col-md-10">
         <div class="task-dumpling">
-          <h4>Task Name</h4>
-          <p>Task Description</p>
+          <h4>{{task.name}}</h4>
+          <p>{{task.desc}}</p>
           <button type="button">Edit</button>
           <button type="button">Shifts</button>
         </div>
