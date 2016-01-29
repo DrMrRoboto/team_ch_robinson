@@ -1,10 +1,47 @@
 extends layout
 
 block content
-	header
-		h1 C.H. Robinson
-		h2 CHR Volunteers
-		ul.nav.nav-pills(ng-controller="navCtrl")
+	header#top.site-header
+		nav.navbar.navbar-default.navbar-fixed-top
+			.container
+				.row
+					.navbar-header
+						button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+							i.fa.fa-bars
+						.logo-wrapper
+							a.navbar-brand(href='/#/' ng-hide='adminPath()')
+								| CHR
+								em Volunteers
+								span.logo-s
+					#main-menu.collapse.navbar-collapse
+						ul.nav.navbar-nav.navbar-right
+							li
+								a(href='/#/adminCal' ng-show='adminPath()') Admin
+							li
+								a(href='/#/adminCal' ng-show='adminPath()') Home
+							li.dropdown(role="presentation" ng-hide="adminPath()").pull-right
+								a.dropdown-toggle(data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false")
+									| Admin
+									span.caret
+								form.dropdown-menu
+									fieldset.form-group-dropdown
+										label(for="exampleInputEmail1") Email address
+										input#exampleInputEmail1.form-control(type="email", placeholder="Enter email")
+									fieldset.form-group-dropdown
+										label(for="exampleInputPassword1") Password
+										input#exampleInputPassword1.form-control(type="password", placeholder="Password")
+									.checkbox-pass
+										label
+											input(type="checkbox")
+											| Remember Me
+											br
+											a.btn.btn-primary(href="/#/adminCal") Submit
+							li.pull-right
+								a(href='/#/' ng-show="adminPath()") Logout
+		//h1 C.H. Robinson
+		//h2 CHR Volunteers
+
+		//ul.nav.nav-pills(ng-controller="navCtrl")
 			li
 				a(href='/#/' ng-hide='adminPath()') Home
 			li
@@ -28,8 +65,8 @@ block content
 							a.btn.btn-primary(href="/#/adminCal") Submit
 			li.pull-right
 				a(href='/#/' ng-show="adminPath()") Logout
-		hr
-		ul.nav.nav-pills(ng-controller="navCtrl" ng-show="adminPath()")
+		//hr
+		//ul.nav.nav-pills(ng-controller="navCtrl" ng-show="adminPath()")
 			li
 				a(href='/#/adminEvent') Create Event
 			li.pull-right
@@ -40,5 +77,7 @@ block content
 				form.navbar-form
 					input.form-control(type="search")
 					button.btn.btn-default(type="submit") Search
+	//
+	body
 	.main(ng-view)
 
