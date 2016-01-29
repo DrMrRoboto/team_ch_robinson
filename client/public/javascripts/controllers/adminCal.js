@@ -6,7 +6,6 @@ app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe',
 
     eventServe.getEvents().then(function(response){
         $scope.eventData = response;
-        console.log($scope.eventData);
     });
 
     var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',

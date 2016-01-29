@@ -4,10 +4,13 @@
 app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 'shiftServe',
     function($scope, $routeParams, eventServe, taskServe, shiftServe){
 
+    $scope.tasks = [];
+
     if($routeParams.id){
         eventServe.getEvent($routeParams.id).then(function(response){
             $scope.event = response;
             taskServe.getTasks($routeParams.id).then(function(response){
+                console.log(response);
                 $scope.tasks = response;
             });
         });
@@ -51,18 +54,23 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
 
     };
 
+
+
     $scope.newTask = {
         name: '',
-        desc: '',
-        Event_id: $routeParams.id
+        description: '',
+        event_id: $routeParams.id
     };
 
     $scope.saveNewTask = function(){
+        console.log($scope.newTask);
         taskServe.createTask($scope.newTask).then(function(response){
+            console.log(response);
             $scope.newTask.name = '';
             $scope.newTask.desc = '';
             taskServe.getTasks($routeParams.id).then(function(response){
                 $scope.tasks = response;
+                console.log($scope.tasks);
             });
         });
     };
