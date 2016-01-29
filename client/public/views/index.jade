@@ -6,7 +6,9 @@ block content
 		h2 CHR Volunteers
 		ul.nav.nav-pills(ng-controller="navCtrl")
 			li
-				a(href='/#/') Home
+				a(href='/#/' ng-hide='adminPath()') Home
+			li
+				a(href='/#/adminCal' ng-show='adminPath()') Home
 			li.dropdown(role="presentation" ng-hide="adminPath()").pull-right
 				a.dropdown-toggle(data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false")
 					| Admin
@@ -31,6 +33,10 @@ block content
 			li
 				a(href='/#/adminEvent') Create Event
 			li.pull-right
+				a(href='/#/volunteerList' ng-show="showVolunteers()") Event Volunteer Report
+			li.pull-right
+				a(href='/#/adminEvent' ng-show="showBack()") Back to Event
+			li.pull-right(ng-show="showSearch()")
 				form.navbar-form
 					input.form-control(type="search")
 					button.btn.btn-default(type="submit") Search
