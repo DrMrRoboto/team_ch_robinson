@@ -117,7 +117,22 @@
                   <h4 class="modal-title">Create Shifts</h4>
                 </div>
                 <div class="modal-body">
-                  <p>Modal form for shift creation</p>
+                  <div>
+                    <h3>{{date.day}}</h3>
+                    <form>
+                      <label for="shiftTime">Time Range of Shift</label>
+                      <input type="datetime" id="shiftTime">
+                      <label for="shiftLength">Shift Length</label>
+                      <select id="shiftLength">
+                        <option>00:30</option>
+                        <option>01:00</option>
+                        <option>02:00</option>
+                        <option>Entire Length</option>
+                      </select>
+                      <label>Slots per Shift</label>
+                      <input type="number" min="1">
+                    </form>
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
