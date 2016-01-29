@@ -1,15 +1,19 @@
-app.controller('navCtrl', ['$scope', '$location', function ($scope, $location) {
+app.controller('navCtrl', ['navServe', '$scope', '$location', function (navServe, $scope, $location) {
 
 	$scope.adminPath = function() {
-		if($location.path() === '/adminCal') {
-			return true;
-		} else if($location.path() === '/adminEvent') {
-			return true;
-		} else if($location.path() === '/volunteerList') {
-			return true;
-		} else {
-			return false;
-		}
+		return navServe.adminPath($location.path());
+	};
+
+	$scope.showSearch = function() {
+		return navServe.showSearch($location.path());
+	};
+
+	$scope.showVolunteers = function() {
+		return navServe.showVolunteers($location.path());
+	};
+
+	$scope.showBack = function() {
+		return navServe.showBack($location.path());
 	};
 
 }]);
