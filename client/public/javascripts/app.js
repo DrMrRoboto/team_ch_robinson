@@ -6,7 +6,7 @@ app.config(function($routeProvider){
       controller: 'userCal',
       templateUrl: 'views/templates/userCal.html'
     })
-    .when('/userEvent',{
+    .when('/userEvent/:id',{
       controller: 'userEvent',
       templateUrl: 'views/templates/userEvent.html'
     })
