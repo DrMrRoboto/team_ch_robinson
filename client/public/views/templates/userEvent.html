@@ -1,7 +1,7 @@
 <div>
-	<p>Event Name: {{event.name}}</p>
+	<p>Event Name: {{event.title}}</p>
 
-	<p>Event Time: {{event.startTime}} - {{event.endTime}}</p>
+	<p>Event Time: {{event.startsAt}} - {{event.endsAt}}</p>
 
 	<p>Event Description</p>
 
@@ -16,10 +16,10 @@
 			<th>Registered</th>
 			<th>Sign-Up</th>
 		</tr>
-		<tr>
-			<td>{{task.name}}</td>
+		<tr ng-repeat="shift in shifts">
+			<td>{{shift.name}}</td>
 			<td>{{shift.startTime}} - {{shift.endTime}}</td>
-			<td>{{shift.slotsAvailable - shift.slotsUsed}}</td>
+			<td>{{shift.slotsAvailable}} - {{shift.slotsUsed}}</td>
 			<td>{{volunteer.firstName}} {{volunteer.lastName}}</td>
 			<td>
 				<button class="btn btn-default" data-toggle="modal" data-target="#signup">Sign-Up</button>
