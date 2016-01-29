@@ -66,8 +66,7 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         console.log($scope.newTask);
         taskServe.createTask($scope.newTask).then(function(response){
             console.log(response);
-            $scope.newTask.name = '';
-            $scope.newTask.desc = '';
+            $scope.clearNewTask();
             taskServe.getTasks($routeParams.id).then(function(response){
                 $scope.tasks = response;
                 console.log($scope.tasks);
@@ -76,7 +75,8 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
     };
 
     $scope.clearNewTask = function(){
-
+        $scope.newTask.name = '';
+        $scope.newTask.description = '';
     };
 
 }]);
