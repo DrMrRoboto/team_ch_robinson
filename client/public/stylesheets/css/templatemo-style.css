@@ -31,7 +31,7 @@ a:hover {
 .navbar {
 	background: #212121;
 	width: 100%;
-	height: 100px;
+	height: 120px;
 	display: inline-block;
 }
 
@@ -41,7 +41,7 @@ a:hover {
 
 .navbar-default .navbar-brand:hover {
 	text-decoration: none;
-	color: #e54a45;
+	color: #f47b20;
 }
 
 .toggle-menu {
@@ -49,7 +49,7 @@ a:hover {
 	margin-right: 15px;
 	border: none;
 	outline: 0;
-	background: #e54a45;
+	background: #f47b20;
 	color: #fff;
 	width: 46px;
 	height: 46px;
@@ -58,7 +58,7 @@ a:hover {
 }
 
 .navbar-default .navbar-brand {
-	color: #e54a45;
+	color: #f47b20;
 	font-family: 'Open Sans';
 	font-size: 32px;
 	font-weight: 600;
@@ -106,7 +106,7 @@ a:hover {
 }
 
 .cta h3 {
-	padding-top: 30px;
+	padding-top: 20px;
 	font-family: 'Open Sans';
 	font-size: 32px;
 	font-weight: 700;
