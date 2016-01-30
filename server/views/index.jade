@@ -14,7 +14,7 @@ block content
 								em Volunteers
 								span.logo-s
 					#main-menu.collapse.navbar-collapse
-						ul.nav.navbar-nav.navbar-right
+						ul.nav.navbar-nav.navbar-right(ng-controller="navCtrl")
 							li
 								a(href='/#/adminCal' ng-show='adminPath()') Admin
 							li
@@ -38,6 +38,21 @@ block content
 											a.btn.btn-primary(href="/#/adminCal") Submit
 							li.pull-right
 								a(href='/#/' ng-show="adminPath()") Logout
+
+						.container.search
+						ul.nav.nav-pills(ng-controller="navCtrl" ng-show="adminPath()")
+							li
+								a(href='/#/adminEvent') Create Event
+							li.pull-right
+								a(href='/#/volunteerList' ng-show="showVolunteers()") Event Volunteer Report
+							li.pull-right
+								a(href='/#/adminEvent' ng-show="showBack()") Back to Event
+							li.pull-right(ng-show="showSearch()")
+								form.navbar-form
+									input.form-control(type="search")
+									button.btn.btn-default(type="submit") Search
+
+
 		//h1 C.H. Robinson
 		//h2 CHR Volunteers
 

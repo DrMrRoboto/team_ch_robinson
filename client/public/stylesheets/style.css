@@ -7,7 +7,19 @@ a {
     color: #00B7FF;
 }
 
-.break {
+.adminCalBreak{
+    height: 150px;
+}
+.adminEventBreak{
+    height: 150px;
+}
+.volunteerListBreak{
+    height: 150px;
+}
+.userCalBreak{
+    height: 150px;
+}
+.userEventBreak{
     height: 150px;
 }
 .volRepNav {
