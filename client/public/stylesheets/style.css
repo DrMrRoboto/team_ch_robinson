@@ -7,6 +7,9 @@ a {
     color: #00B7FF;
 }
 
+.break {
+    height: 150px;
+}
 .volRepNav {
     float: right;
     margin: 5px;

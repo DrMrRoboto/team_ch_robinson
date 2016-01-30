@@ -24,9 +24,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         };
     }
 
-
-
-
     $scope.startAtOpen = false;
     $scope.endAtOpen = false;
 
@@ -53,8 +50,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         }
 
     };
-
-
 
     $scope.newTask = {
         name: '',
