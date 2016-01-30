@@ -108,8 +108,8 @@
               </div>
             </div>
           </div>
-          <button class="btn btn-default" type="button" data-toggle="modal" data-target="#createShifts">Shifts</button>
-          <div id="createShifts" class="modal fade" role="dialog">
+          <button class="btn btn-default" type="button" data-toggle="modal" data-target="#{{task._id}}">New Shift</button>
+          <div id="{{task._id}}" class="modal fade" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -122,12 +122,12 @@
                     <form>
                       <label for="shiftTime">Time Range of Task</label>
                       <div>
-                        <input ng-model="slider.min | time" readonly>
-                        <input ng-model="slider.max | time" readonly>
+                        <span>{{task.slider.min | time}}</span>
+                        <span>{{task.slider.max | time}}</span>
                         <rzslider id="shiftTime"
-                                  rz-slider-model="slider.min"
-                                  rz-slider-high="slider.max"
-                                  rz-slider-options="slider.options"></rzslider>
+                                  rz-slider-model="task.slider.min"
+                                  rz-slider-high="task.slider.max"
+                                  rz-slider-options="task.slider.options"></rzslider>
                       </div>
                       <label for="shiftLength">Shift Length</label>
                       <select id="shiftLength">
