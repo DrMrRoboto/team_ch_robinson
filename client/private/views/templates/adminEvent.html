@@ -17,13 +17,13 @@
         <div class="input-group">
           <label for="startTime">Event Start Date/Time</label>
           <input id="startTime" type="text" class="form-control" datetime="yyyy-MM-dd HH:mm"
-                 datetime-picker="dd MMM yyyy HH:mm" ng-model="event.startsAt" is-open="startAtOpen"
+                 datetime-picker="dd MMM yyyy HH:mm" ng-model="event.startsAt | date: 'MMMM d, yyyy H:mm a'" is-open="startAtOpen"
                  ng-click="openStartAt($event, prop)"/>
         </div>
         <div class="input-group">
           <label for="endTime">Event End Date/Time</label>
           <input id="endTime" type="text" class="form-control" datetime="yyyy-MM-dd HH:mm"
-                 datetime-picker="dd MMM yyyy HH:mm" ng-model="event.endsAt" is-open="endAtOpen"
+                 datetime-picker="dd MMM yyyy HH:mm" ng-model="event.endsAt | date: 'MMMM d, yyyy H:mm a'" is-open="endAtOpen"
                  ng-click="openEndAt($event, prop)"/>
         </div>
         <div class="input-group">
@@ -108,20 +108,27 @@
               </div>
             </div>
           </div>
-          <button class="btn btn-default" type="button" data-toggle="modal" data-target="#createShifts">Shifts</button>
-          <div id="createShifts" class="modal fade" role="dialog">
+          <button class="btn btn-default" type="button" data-toggle="modal" data-target="#{{task._id}}">New Shift</button>
+          <div id="{{task._id}}" class="modal fade" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <button type="button" value="2, 5" min="0" max="10" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Create Shifts</h4>
                 </div>
                 <div class="modal-body">
                   <div>
                     <h3>{{date.day}}</h3>
                     <form>
-                      <label for="shiftTime">Time Range of Shift</label>
-                      <input type="datetime" id="shiftTime">
+                      <label for="shiftTime">Time Range of Task</label>
+                      <div>
+                        <span>{{task.slider.min | time}}</span>
+                        <span>{{task.slider.max | time}}</span>
+                        <rzslider id="shiftTime"
+                                  rz-slider-model="task.slider.min"
+                                  rz-slider-high="task.slider.max"
+                                  rz-slider-options="task.slider.options"></rzslider>
+                      </div>
                       <label for="shiftLength">Shift Length</label>
                       <select id="shiftLength">
                         <option>00:30</option>
@@ -130,7 +137,7 @@
                         <option>Entire Length</option>
                       </select>
                       <label>Slots per Shift</label>
-                      <input type="number" min="1">
+                      <input type="number" min="1" value="1">
                     </form>
                   </div>
                 </div>
