@@ -79,5 +79,26 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         $scope.newTask.description = '';
     };
 
+    $scope.slider = {
+        min: 540,
+        max: 1020,
+        options: {
+            floor:0,
+            ceil:1440,
+            step: 30,
+            draggableRange: true,
+            minRange: 30,
+            showSelectionBar: true,
+            showSelectionBarEnd: true,
+            hideLimitLabels: true
+        }
+    }
+
+    $scope.shiftTimes= {
+        start: $scope.slider.min,
+        end: $scope.slider.max
+    }
+
+
 }]);
 
