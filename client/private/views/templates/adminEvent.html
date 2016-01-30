@@ -17,13 +17,13 @@
         <div class="input-group">
           <label for="startTime">Event Start Date/Time</label>
           <input id="startTime" type="text" class="form-control" datetime="yyyy-MM-dd HH:mm"
-                 datetime-picker="dd MMM yyyy HH:mm" ng-model="event.startsAt" is-open="startAtOpen"
+                 datetime-picker="dd MMM yyyy h:mm a" ng-model="event.startsAt" is-open="startAtOpen"
                  ng-click="openStartAt($event, prop)"/>
         </div>
         <div class="input-group">
           <label for="endTime">Event End Date/Time</label>
           <input id="endTime" type="text" class="form-control" datetime="yyyy-MM-dd HH:mm"
-                 datetime-picker="dd MMM yyyy HH:mm" ng-model="event.endsAt" is-open="endAtOpen"
+                 datetime-picker="dd MMM yyyy h:mm a" ng-model="event.endsAt" is-open="endAtOpen"
                  ng-click="openEndAt($event, prop)"/>
         </div>
         <div class="input-group">
