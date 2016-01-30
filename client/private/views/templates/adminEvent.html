@@ -113,7 +113,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <button type="button" value="2, 5" min="0" max="10" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Create Shifts</h4>
                 </div>
                 <div class="modal-body">
@@ -121,7 +121,14 @@
                     <h3>{{date.day}}</h3>
                     <form>
                       <label for="shiftTime">Time Range of Shift</label>
-                      <input type="datetime" id="shiftTime">
+                      <div>
+                        <input ng-model="slider.min">
+                        <input ng-model="slider.max">
+                        <rzslider id="shiftTime"
+                                  rz-slider-model="slider.min"
+                                  rz-slider-high="slider.max"
+                                  rz-slider-options="slider.options"></rzslider>
+                      </div>
                       <label for="shiftLength">Shift Length</label>
                       <select id="shiftLength">
                         <option>00:30</option>
