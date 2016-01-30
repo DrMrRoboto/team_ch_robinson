@@ -80,8 +80,8 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
     };
 
     $scope.slider = {
-        min: 0,
-        max: 1440,
+        min: 480,
+        max: 1020,
         options: {
             floor:0,
             ceil:1440,
