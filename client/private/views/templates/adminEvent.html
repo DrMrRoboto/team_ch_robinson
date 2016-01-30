@@ -122,8 +122,8 @@
                     <form>
                       <label for="shiftTime">Time Range of Shift</label>
                       <div>
-                        <input ng-model="slider.min">
-                        <input ng-model="slider.max">
+                        <input ng-model="slider.min | time" readonly>
+                        <input ng-model="slider.max | time" readonly>
                         <rzslider id="shiftTime"
                                   rz-slider-model="slider.min"
                                   rz-slider-high="slider.max"
