@@ -45,7 +45,7 @@
 		<div class="user-event-list">
 			<h3>Event List</h3>
 			<div class="list-group">
-				<a class="list-group-item" ng-repeat="event in eventData | limitTo: 10" href="">{{event.title}}</a>
+				<a class="list-group-item" ng-repeat="event in eventData | limitTo: 10 | orderBy: 'startsAt'" href="">{{event.title}} - {{event.startsAt | date: 'MMMM d, yyyy H:mm a'}}</a>
 			</div>
 		</div>
 	</div>
