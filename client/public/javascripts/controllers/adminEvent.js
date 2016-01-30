@@ -12,6 +12,22 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
             taskServe.getTasks($routeParams.id).then(function(response){
                 console.log(response);
                 $scope.tasks = response;
+                $scope.tasks.forEach(function(element){
+                    element.slider = {
+                        min: 0,
+                        max: 1440,
+                        options: {
+                            floor:0,
+                            ceil:1440,
+                            step: 30,
+                            draggableRange: true,
+                            minRange: 30,
+                            showSelectionBar: true,
+                            showSelectionBarEnd: true,
+                            hideLimitLabels: true
+                        }
+                    }
+                });
             });
         });
     } else {
@@ -79,9 +95,9 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         $scope.newTask.description = '';
     };
 
-    $scope.slider = {
-        min: 480,
-        max: 1020,
+    $scope.tasks.slider = {
+        min: 0,
+        max: 1440,
         options: {
             floor:0,
             ceil:1440,
@@ -92,12 +108,7 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
             showSelectionBarEnd: true,
             hideLimitLabels: true
         }
-    }
-
-    $scope.shiftTimes= {
-        start: $scope.slider.min,
-        end: $scope.slider.max
-    }
+    };
 
 
 }]);
