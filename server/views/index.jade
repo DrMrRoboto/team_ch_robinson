@@ -116,3 +116,26 @@ block content
         .container
             .main(ng-view)
 
+    footer
+        .container
+            .row
+                .col-md-6.col-sm-6.col-sm-12
+                    p.copyright
+                        | Copyright © 2084
+                        a(href='#') Company Name
+                .col-md-6.col-sm-6.col-sm-12
+                    ul.social
+                        li
+                            a.fa.fa-facebook(href='#')
+                        li
+                            a.fa.fa-twitter(href='#')
+                        li
+                            a.fa.fa-instagram(href='#')
+                        li
+                            a.fa.fa-google-plus(href='#')
+    script(src='js/vendor/jquery-1.11.0.min.js')
+    script.
+        window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\\/script>')
+    script(src='js/vendor/bootstrap.js')
+    script(src='js/main.js')
+
