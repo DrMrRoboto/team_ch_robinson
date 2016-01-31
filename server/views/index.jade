@@ -39,8 +39,24 @@ block content
                                             a.btn.btn-primary(href="/#/adminCal") Submit
                             li.pull-right
                                 a(href='/#/' ng-show="adminPath()") Logout
+                        .cta
+                            .container
+                                .row
+                                    .col-md-12
+                                    ul.nav.nav-pills(ng-controller="navCtrl" ng-show="adminPath()")
 
-                    #nav-search.collapse.navbar-collapse
+                                        li
+                                            a(href='/#/adminEvent') Create Event
+                                        li.pull-right
+                                            a(href='/#/volunteerList' ng-show="showVolunteers()") Event Volunteer Report
+                                        li.pull-right
+                                            a(href='/#/adminEvent' ng-show="showBack()") Back to Event
+                                        li.pull-right(ng-show="showSearch()")
+                                            form.navbar-form
+                                                input.form-control(type="search")
+                                                button.btn.btn-default(type="submit") Search
+
+                   // #nav-search.collapse.navbar-collapse
                         ul.nav.nav-pills(ng-controller="navCtrl" ng-show="adminPath()")
                             li
                                 a(href='/#/adminEvent') Create Event
@@ -93,7 +109,10 @@ block content
                 form.navbar-form
                     input.form-control(type="search")
                     button.btn.btn-default(type="submit") Search
-    //
+
+                    body
     body
-    .main(ng-view)
+    .main-content
+        .container
+            .main(ng-view)
 
