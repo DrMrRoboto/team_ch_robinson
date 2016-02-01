@@ -2,7 +2,7 @@
 <div>
 	<p>Event Name: {{event.title}}</p>
 
-	<p>Event Time: {{event.startsAt}} - {{event.endsAt}}</p>
+	<p>Event Time: {{event.startsAt | date: 'MMMM d, yyyy H:mm a'}} - {{event.endsAt | date: 'MMMM d, yyyy H:mm a'}}</p>
 
 	<p>Event Description</p>
 
@@ -19,7 +19,7 @@
 		</tr>
 		<tr ng-repeat="shift in shifts">
 			<td>{{shift.name}}</td>
-			<td>{{shift.startTime}} - {{shift.endTime}}</td>
+			<td>{{shift.startTime | date: 'MMMM d, yyyy H:mm a'}} - {{shift.endTime | date: 'MMMM d, yyyy H:mm a'}}</td>
 			<td>{{shift.slotsAvailable}} - {{shift.slotsUsed}}</td>
 			<td>{{volunteer.firstName}} {{volunteer.lastName}}</td>
 			<td>

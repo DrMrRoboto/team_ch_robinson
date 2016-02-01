@@ -1,7 +1,8 @@
-app.controller('navCtrl', ['navServe', '$scope', '$location', function (navServe, $scope, $location) {
+app.controller('navCtrl', ['navServe', '$scope', '$location', '$routeParams', function (navServe, $scope, $location, $routeParams) {
+
 
 	$scope.adminPath = function() {
-		return navServe.adminPath($location.path());
+		return navServe.adminPath($location.path(), $routeParams.id);
 	};
 
 	$scope.showSearch = function() {
@@ -9,7 +10,7 @@ app.controller('navCtrl', ['navServe', '$scope', '$location', function (navServe
 	};
 
 	$scope.showVolunteers = function() {
-		return navServe.showVolunteers($location.path());
+		return navServe.showVolunteers($location.path(), $routeParams.id);
 	};
 
 	$scope.showBack = function() {
