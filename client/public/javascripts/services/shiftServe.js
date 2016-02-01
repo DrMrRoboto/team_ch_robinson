@@ -28,11 +28,13 @@ app.factory('shiftServe',['$http',function($http){
      * @returns $http promise object
      */
     createShift: function(newShift){
+      console.log(newShift);
       return $http({
         method: 'post',
         data: newShift,
         url: '/shifts'
       }).then(function(response){
+        console.log(response.data);
         return response.data
       }, function(errorResponse){
         return errorResponse.data
