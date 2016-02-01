@@ -14,14 +14,14 @@
 			<th>Shirt Size</th>
 			<th>Guests</th>
 		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+		<tr ng-repeat="event in events">
+			<td>{{event.newTask}}</td>
+			<td>{{shift.startTime}}</td>
+			<td>{{volunteer.fistName}} {{volunteer.lastName}}</td>
+			<td>{{volunteer.email}}</td>
+			<td>{{volunteer.phone}}</td>
+			<td>{{volunteer.shirtSize}}</td>
+			<td>{{volunteer.guests}}</td>
 		</tr>
 	</table>
 </div>
