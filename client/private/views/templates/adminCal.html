@@ -42,13 +42,13 @@
       </mwl-calendar>
     </div>
     <div class="admin-future-list">
-      <h3>Upcoming Events</h3>
+      <h4>Upcoming Events</h4>
       <div class="list-group">
         <a class="list-group-item" ng-repeat="event in eventData | orderBy: 'startsAt' | limitTo: 5" href="">{{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
       </div>
     </div>
     <div class="admin-past-list">
-      <h3>Past Events</h3>
+      <h4>Past Events</h4>
       <div class="list-group">
         <a class="list-group-item" ng-repeat="event in eventData | orderBy: '-startsAt' | limitTo: 5" href="">{{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
       </div>
