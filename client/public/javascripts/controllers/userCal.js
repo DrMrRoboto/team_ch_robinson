@@ -19,10 +19,13 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe',
 
   $scope.view = 'month';
 
+    //sets calendarView to current month
   $scope.viewDate = new Date(moment());
 
   $scope.viewTitle = monthNames[$scope.viewDate.getMonth()];
 
+    //$scope.now is called within admin/user calendarView pages so that upcoming
+    //and previous events are displayed within the context of 'today'
   $scope.now = moment();
 
 }]);
