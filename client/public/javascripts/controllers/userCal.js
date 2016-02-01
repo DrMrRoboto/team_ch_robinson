@@ -23,7 +23,6 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe',
 
   $scope.viewTitle = monthNames[$scope.viewDate.getMonth()];
 
-  moment();
-
+  $scope.now = moment();
 
 }]);

@@ -20,5 +20,6 @@ app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe',
 
     $scope.viewTitle = monthNames[$scope.viewDate.getMonth()];
 
+    $scope.now = moment();
 
 }]);
