@@ -36,7 +36,9 @@ h2 {
     float: right;
     margin: 5px;
 }
-
+fieldset {
+    background-color: #000;
+}
 .user-event-cal {
     float: left;
     width: 80%;
