@@ -118,8 +118,12 @@
                 </div>
                 <div class="modal-body">
                   <div>
-                    <h3>{{date.day}}</h3>
                     <form>
+                      <div class="input-group">
+                        <input id="shiftDate" type="text" placeholder="Enter Shift Date" class="btn btn-default"
+                               datetime-picker="MMMM d, yyyy" enable-time="false" ng-model="shift.date"
+                               is-open="startAtOpen" ng-click="openStartAt($event, prop)"/>
+                      </div>
                       <label for="shiftTime">Time Range of Task</label>
                       <div>
                         <span>{{task.slider.min | time}}</span>
