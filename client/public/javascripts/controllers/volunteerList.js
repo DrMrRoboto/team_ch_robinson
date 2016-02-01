@@ -23,6 +23,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 							if (response[i]) {
 								var newTableObject = {
 									taskName: element.taskName,
+									date: element.date,
 									startTime: element.startTime,
 									endTime: element.endTime,
 									volunteerName: response[i].firstName + ' ' + response[i].lastName,
@@ -34,6 +35,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 							} else {
 								var newTableObject = {
 									taskName: element.taskName,
+									date: element.date,
 									startTime: element.startTime,
 									endTime: element.endTime,
 									volunteerName: '',
