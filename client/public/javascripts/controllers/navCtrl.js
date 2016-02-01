@@ -17,4 +17,8 @@ app.controller('navCtrl', ['navServe', '$scope', '$location', '$routeParams', fu
 		return navServe.showBack($location.path());
 	};
 
+	$scope.volunteerPath = function(){
+		return '/#/volunteerList/' + $routeParams.id;
+	}
+
 }]);
