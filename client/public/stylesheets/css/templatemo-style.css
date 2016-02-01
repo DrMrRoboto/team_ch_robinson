@@ -141,8 +141,8 @@ a:hover {
 }
 
 .main-content {
-	background-image: url(../img/background01.jpg);
-	/*background-color: #b5d4f0; */
+	/*background-image: url(../img/background01.jpg);*/
+	background-color: #b5d4f0;
 	background-size: cover;
 	background-position: center;
 	width: 100%;
@@ -453,8 +453,8 @@ footer .social li a:hover {
 	}
 
 	.main-content {
-		background-image: url(../img/background01.jpg);
-        /* background-color: #b5d4f0; */
+		/* background-image: url(../img/background01.jpg); */
+        background-color: #b5d4f0;
 		width: 100%;
 		height: 100%;
 		text-align: center;
@@ -570,7 +570,7 @@ footer .social li a:hover {
 	}
 }
 
-.navbar-default .navbar-collapse, 
+.navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
 	border-color: transparent;
 	background: #0078ae;

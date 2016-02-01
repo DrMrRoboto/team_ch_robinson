@@ -1,5 +1,5 @@
 body {
-    padding: 50px;
+    padding: 0px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -32,12 +32,17 @@ a {
     width: 80%;
     margin-right: 0;
     padding-bottom: 20px;
+    background: rgba(255,255,255,0.9);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
 }
 .admin-event-cal {
   float: left;
   width: 80%;
   margin-right: 0;
   padding-bottom: 20px;
+    background: rgba(255,255,255,0.9);
+    margin-bottom: 40px;
 }
 
 .user-event-list {
