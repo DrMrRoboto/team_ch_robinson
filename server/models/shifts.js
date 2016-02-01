@@ -8,12 +8,13 @@ var Volunteer = require('./volunteers');
 
 //creates a schema to standardize Shift creation
 var ShiftSchema = new mongoose.Schema({
-	startDate: {type: Date, required: true},
-	endDate: {type: Date, required: true},
+	date: {type: Date, required: true},
+	startTime: {type: Number, required: true},
+	endTime: {type: Number, required: true},
 	slotsAvailable: {type: Number, required: true},
-	slotsUsed: {type: Number, required: true},
+	slotsUsed: {type: Number},
 	task_id: {type: String, required: true},
-	taskName: {type: String, required: true}
+	task_name: {type: String, required: true}
 });
 
 // Deletes Shifts and all associated Items
