@@ -40,7 +40,12 @@ block content
                             li.pull-right
                                 a(href='/#/' ng-show="adminPath()") Logout
 
-                        div.search
+                        div.space
+
+            .cta
+                .container
+                    .row
+                        .col-md-12
                             ul.nav.nav-pills(ng-controller="navCtrl" ng-show="adminPath()")
                                 .row
                                     .col-md-6.col-sm-6.col-sm-6
@@ -50,10 +55,12 @@ block content
                                             a(href='/#/volunteerList' ng-show="showVolunteers()") Event Volunteer Report
                                         li.pull-right
                                             a(href='/#/adminEvent' ng-show="showBack()") Back to Event
-                                        li.pull-right(ng-show="showSearch()")
-                                            form.navbar-form
-                                                input.form-control(type="search")
-                                                button.btn.btn-default(type="submit") Search
+                                    li.pull-right(ng-show="showSearch()")
+                                        form.navbar-form
+                                            input.form-control(type="search")
+                                            button.btn.btn-default(type="submit") Search
+
+
 
     body
         .main-content

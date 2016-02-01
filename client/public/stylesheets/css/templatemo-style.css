@@ -33,15 +33,15 @@ a:hover {
 	width: 100%;
 	height: 160px;
 	display: inline-block;
+	padding: 20px;
 }
 #nav-search {
     margin-top: 1%;
     padding-bottom: 1px;
     margin-bottom: 1px;
-
 }
 .navbar-nav {
-	margin-top: 26px;
+	margin-top: 35px;
 }
 .search {
     padding-top: 45px;
@@ -103,7 +103,7 @@ a:hover {
 }
 
 .navbar-header {
-	margin-top: 24px;
+	margin-top: 7px;
 }
 
 .cta button {
@@ -112,22 +112,24 @@ a:hover {
 .cta {
 	border-top: 2px solid #f47b20;
 	border-bottom: 2px solid #f47b20;
-	margin-top: 100px;
-    margin-left: 0px;
-    margin-right: 0px;
 	background-color: #eee;
-    width: 100%;
+    width: 79%;
+	height: 25%;
+	margin: auto;
+	padding-bottom: 20px;
 }
 
 .cta h3 {
-	padding-top: 0px;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;;
 	font-size: 32px;
 	font-weight: 700;
 	color: #333;
 	text-align: center;
 	text-transform: uppercase;
-    width: 100%;
+	width: 79%;
+	height: 25%;
+	margin: auto;
+	padding-bottom: 20px;
 }
 
 .cta span {
@@ -138,7 +140,8 @@ a:hover {
 	text-align: center;
 	text-transform: uppercase;
 	display: block;
-	padding-bottom: 0px;
+	padding-bottom: 20px;
+	margin: auto;
 }
 
 .main-content {
@@ -150,6 +153,7 @@ a:hover {
 	height: 100%;
 	position: relative;
 	display: inline-block;
+	padding-bottom: 30px;
 }
 
 .small-icons ul {
@@ -259,7 +263,7 @@ footer .social li a:hover {
 }
 
 /* Medium devices (desktops, 992px and up) */
-@media (max-width:992px) { 
+@media (max-width:992px) {
 
 	.navbar-header {
 		padding-left: 15px;
@@ -284,52 +288,7 @@ footer .social li a:hover {
 		background-size: cover;
 		display: block;
 		background-position: top center;
-	}
-
-	.map img {
-		margin-top: 60px;
-		width: 100%;
-		height: 100%;
-		text-align: center;
-		margin-right: auto;
-		margin-left: auto;
-		display: block;
-		margin-bottom: 30px;
-	}
-
-	.first-section h2 {
-		margin-top: 100px;
-		margin-right: 0;
-		margin-left: 0;
-		text-align: center;
-		width: 100%;
-	}
-
-	.first-section h4 {
-		margin-top: 100px;
-		margin-right: 0;
-		margin-left: 0;
-		text-align: center;
-	}
-
-	.second-icon {
-		margin-right: auto;
-		margin-left: auto;
-		text-align: center;
-		display: block;
-	}
-
-	.go-pro-btn {
-		margin-top: 100px;
-	}
-
-	.first-discription h6 {
-		margin-top: 100px;
-	}
-
-	.first-discription p {
-		text-align: center;
-		display: block;
+		padding-bottom: 30px;
 	}
 
 	.big-icon img {
@@ -354,30 +313,6 @@ footer .social li a:hover {
 		display: inline-block;
 	}
 
-	.contact-form h1 {
-		color: #fff;
-	}
-
-	.contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea, .elegant-aero select {
-		width: 100%;
-	}
-
-	.contact-form textarea {
-		min-width: 100%;
-	    min-height: 180px;
-	    max-width: 100%;
-	    max-height: 180px;
-	}
-
-	.contact-form .button {
-		background-color: #b93c38;
-		margin-bottom: 30px;
-	}
-
-	.map img {
-		width: 80%;
-	}
-
 	footer .social li a {
 		background-color: #e54a45;
 	}
@@ -395,21 +330,20 @@ footer .social li a:hover {
 .navbar-default .navbar-form {
 	border-color: transparent;
 	background: rgba(0, 120, 174, 0.9);
-	padding-bottom: 0px;
-	margin-top: 25px;
+	padding-top: 0px;
+	padding-bottom: 5px;
+	margin-top: 0;
 }
 
 /* Small devices (tablets, 768px and up) */
-@media (max-width:768) {
+@media (max-width:768px) {
 	.navbar-default .navbar-collapse, 
 	.navbar-default .navbar-form {
 		padding-top: 20px;
 	}
-
 	.map {
 		overflow: hidden;
 	}
-
 	.map img {
 		width: 100%;
 		text-align: center;
