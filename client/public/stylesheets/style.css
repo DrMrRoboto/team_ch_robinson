@@ -38,7 +38,7 @@ h2 {
     margin: 5px;
 }
 fieldset {
-    background-color: #000;
+    background-color: rgba(181, 212, 240, 0.8);
 }
 .user-event-cal {
     float: left;
@@ -106,6 +106,7 @@ fieldset {
 
 .checkbox-pass {
   padding-left: 10%;
+    background-color: rgba(181, 212, 240, 0.8);
 }
 
 .btn-primary {
