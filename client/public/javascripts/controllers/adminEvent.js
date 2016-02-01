@@ -47,9 +47,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         };
     }
 
-
-
-
     $scope.startAtOpen = false;
     $scope.endAtOpen = false;
     $scope.shiftDateOpen = false;
@@ -83,8 +80,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         }
 
     };
-
-
 
     $scope.newTask = {
         name: '',
