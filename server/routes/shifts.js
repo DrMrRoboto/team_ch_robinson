@@ -23,9 +23,13 @@ router.post('/', function(req, res, next) {
 
 /*Update Shift*/
 router.put('/:id', function(req, res, next) {
+	console.log(req.params.id, req.body);
 	var shiftID = req.params.id;
 	var shift = req.body;
 	Shift.findByIdAndUpdate(shiftID, shift, {new:true}, function(err, data){
+		if(err){
+			res.send(err);
+		}
 		res.send(data);
 	});
 });
