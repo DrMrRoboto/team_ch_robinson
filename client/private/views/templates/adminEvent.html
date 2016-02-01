@@ -118,8 +118,12 @@
                 </div>
                 <div class="modal-body">
                   <div>
-                    <h3>{{date.day}}</h3>
                     <form>
+                      <div class="input-group">
+                        <input id="shiftDate" type="text" placeholder="Enter Shift Date"
+                               datetime-picker="MMMM d, yyyy" enable-time="false" ng-model="shiftDate"
+                               is-open="shiftDateOpen" ng-click="openShiftDate($event, prop)"/>
+                      </div>
                       <label for="shiftTime">Time Range of Task</label>
                       <div>
                         <span>{{task.slider.min | time}}</span>
@@ -130,19 +134,20 @@
                                   rz-slider-options="task.slider.options"></rzslider>
                       </div>
                       <label for="shiftLength">Shift Length</label>
-                      <select id="shiftLength">
-                        <option>00:30</option>
-                        <option>01:00</option>
-                        <option>02:00</option>
+                      <select id="shiftLength" ng-model="shiftLength">
+                        <option value=30>00:30</option>
+                        <option value=60>01:00</option>
+                        <option value=120>02:00</option>
                         <option>Entire Length</option>
                       </select>
                       <label>Slots per Shift</label>
-                      <input type="number" min="1" value="1">
+                      <input type="number" min="1" value="1" ng-model="shiftSlots">
                     </form>
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
+                  <button type="button" class="btn btn-default" ng-click="saveNewShift(task._id, task.name, $index,
+                  shiftLength, shiftSlots, shiftDate)" data-dismiss="modal">Submit</button>
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
               </div>

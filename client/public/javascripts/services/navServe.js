@@ -1,11 +1,13 @@
 app.factory('navServe', [function () {
 	return {
-		adminPath: function (path) {
+		adminPath: function (path, id) {
 			if (path === '/adminCal') {
 				return true;
 			} else if (path === '/adminEvent') {
 				return true;
-			} else if (path === '/volunteerList') {
+			} else if(path === '/adminEvent/' + id) {
+				return true;
+			} else if(path === '/volunteerList') {
 				return true;
 			} else {
 				return false;
@@ -20,8 +22,10 @@ app.factory('navServe', [function () {
 			}
 		},
 
-		showVolunteers: function(path) {
+		showVolunteers: function(path, id) {
 			if (path === '/adminEvent') {
+				return true;
+			} else if (path === '/adminEvent/' + id){
 				return true;
 			} else {
 				return false;
