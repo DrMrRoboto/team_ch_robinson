@@ -11,14 +11,16 @@
 	<table class="table table-bordered">
 		<tr>
 			<th>Task</th>
+			<th>Shift Date</th>
 			<th>Shift Time</th>
 			<th>Slots</th>
 			<th>Registered</th>
 			<th>Sign-Up</th>
 		</tr>
 		<tr ng-repeat="shift in shifts">
-			<td>{{shift.name}}</td>
-			<td>{{shift.startTime | date: 'MMMM d, yyyy H:mm a'}} - {{shift.endTime | date: 'MMMM d, yyyy H:mm a'}}</td>
+			<td>{{shift.task_name}}</td>
+			<td>{{shift.date}}</td>
+			<td>{{shift.startTime | time}} - {{shift.endTime | time}}</td>
 			<td>{{shift.slotsAvailable}} - {{shift.slotsUsed}}</td>
 			<td>{{volunteer.firstName}} {{volunteer.lastName}}</td>
 			<td>
