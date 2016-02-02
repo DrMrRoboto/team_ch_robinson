@@ -1,8 +1,8 @@
 /**
  * Created by chottinger on 1/21/16.
  */
-app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 'shiftServe',
-    function($scope, $routeParams, eventServe, taskServe, shiftServe){
+app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 'shiftServe', '$location',
+    function($scope, $routeParams, eventServe, taskServe, shiftServe, $location){
 
     /**
      * Array to hold list of Tasks for a specific Event ID
@@ -75,8 +75,10 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
             eventServe.updateEvent($scope.event._id, $scope.event)
         } else{
             eventServe.createEvent($scope.event).then(function(response){
-                $scope.eventResponse = response;
-            });
+              $scope.eventResponse = response;
+              var route = '/adminEvent/' + response._id;
+              $location.path(route);
+            })
         }
 
     };
