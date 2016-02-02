@@ -88,6 +88,13 @@ app.factory('eventServe',['$http',function($http){
       }, function(errorResponse){
         return errorResponse.data
       });
+    },
+
+    searchEvents: function() {
+      return $http({
+        method: 'get',
+        url: '/events/search/' + search
+      })
     }
 
 

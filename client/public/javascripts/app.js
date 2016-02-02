@@ -22,6 +22,10 @@ app.config(function($routeProvider){
       controller: 'volunteerList',
       templateUrl: 'views/templates/volunteerList.html'
     })
+    .when('/search',{
+      controller: 'searchCtrl',
+      templateUrl: 'views/templates/search.html'
+    })
     .otherwise({
       redirectTo: '/'
     });

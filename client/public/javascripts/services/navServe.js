@@ -9,6 +9,8 @@ app.factory('navServe', [function () {
 				return true;
 			} else if(path === '/volunteerList') {
 				return true;
+			} else if(path === '/search') {
+				return true;
 			} else {
 				return false;
 			}

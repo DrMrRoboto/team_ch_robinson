@@ -1,0 +1,45 @@
+<div class="searchBreak"></div>
+<div>
+	<h3>Search</h3>
+	<div class="row">
+		<form class="col-md-4">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input type="text" id="searchEvents" class="form-control" placeholder="Enter Search" ng-model="searchEvents">
+				</div>
+			</div>
+		</form>
+	</div>
+	<table class="table table-condensed table-back">
+		<tr>
+			<th ng-click="sortType = 'title'; sortReverse = !sortReverse">
+				Event Name
+				<span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
+				<span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
+				</a>
+			</th>
+			<th ng-click="sortType = 'host'; sortReverse = !sortReverse">
+				Host
+				<span ng-show="sortType == 'host' && !sortReverse" class="fa fa-caret-down"></span>
+				<span ng-show="sortType == 'host' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+			<th ng-click="sortType = 'startsAt'; sortReverse = !sortReverse">
+				Start Date
+				<span ng-show="sortType == 'startsAt' && !sortReverse" class="fa fa-caret-down"></span>
+				<span ng-show="sortType == 'startsAt' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+			<th ng-click="sortType = 'endsAt'; sortReverse = !sortReverse">
+				End Date
+				<span ng-show="sortType == 'endsAt' && !sortReverse" class="fa fa-caret-down"></span>
+				<span ng-show="sortType == 'endsAt' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+		</tr>
+		<tr ng-repeat="event in events | orderBy:sortType:sortReverse | filter:searchEvents">
+			<td><a href="/#/adminEvent/{{event._id}}">{{event.title}}</a></td>
+			<td>{{event.host}}</td>
+			<td>{{event.startsAt | date:'MMM d, yyyy h:mm a'}}</td>
+			<td>{{event.endsAt | date:'MMM d, yyyy h:mm a'}}</td>
+		</tr>
+	</table>
+</div>
