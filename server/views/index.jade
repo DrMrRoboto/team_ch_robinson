@@ -48,17 +48,16 @@ block content
                         .col-md-12
                             ul.nav.nav-pills(ng-controller="navCtrl" ng-show="adminPath()")
                                 .row
-                                    .col-md-6.col-sm-6.col-sm-6
+                                    .col-md-6
                                         li.pull-left
                                             a(href='/#/adminEvent') Create Event
+                                    .col-md-4
                                         li.pull-right
                                             a(href='/#/volunteerList' ng-show="showVolunteers()") Event Volunteer Report
                                         li.pull-right
                                             a(href='/#/adminEvent' ng-show="showBack()") Back to Event
-                                    li.pull-right(ng-show="showSearch()")
-                                        form.navbar-form
-                                            input.form-control(type="search")
-                                            button.btn.btn-default(type="submit") Search
+                                        li.pull-right
+                                            a(href='/#/search' ng-show="showSearch()") Search
 
 
 

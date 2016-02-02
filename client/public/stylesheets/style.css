@@ -33,6 +33,9 @@ h2 {
 .userEventBreak{
     height: 180px;
 }
+.searchBreak{
+    height:180px;
+}
 .volRepNav {
     float: right;
     margin: 5px;
@@ -116,4 +119,8 @@ fieldset {
 
 .rz-bubble {
     display: none;
+}
+
+.table-back{
+    background-color: #b4d5f0;
 }
