@@ -22,7 +22,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 						for (var i = 0; i < element.slotsAvailable; i++) {
 							if (response[i]) {
 								var newTableObject = {
-									taskName: element.taskName,
+									taskName: element.task_name,
 									date: element.date,
 									startTime: element.startTime,
 									endTime: element.endTime,
@@ -34,7 +34,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 								};
 							} else {
 								var newTableObject = {
-									taskName: element.taskName,
+									taskName: element.task_name,
 									date: element.date,
 									startTime: element.startTime,
 									endTime: element.endTime,
@@ -43,7 +43,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 									volunteerPhone: '',
 									volunteerShirt: '',
 									volunteerGuests: []
-								}
+								};
 
 							}
 							$scope.displayData.push(newTableObject);

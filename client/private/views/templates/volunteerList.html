@@ -7,6 +7,7 @@
 	<table class="table table-bordered table-striped">
 
         <tr>
+            <th>Date</th>
             <th>Task</th>
             <th>Shift Time</th>
             <th>Volunteer Name</th>
@@ -19,6 +20,7 @@
 
 
         <tr ng-repeat="row in displayData">
+            <td>{{row.date | date: 'EEE M/d'}}</td>
             <td>{{row.taskName}}</td>
             <td>{{row.startTime | time}}-{{row.endTime | time}}</td>
             <td>{{row.volunteerName}}</td>
