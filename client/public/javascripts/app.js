@@ -18,7 +18,7 @@ app.config(function($routeProvider){
       controller: 'adminEvent',
       templateUrl: 'views/templates/adminEvent.html'
     })
-    .when('/volunteerList',{
+    .when('/volunteerList/:id',{
       controller: 'volunteerList',
       templateUrl: 'views/templates/volunteerList.html'
     })

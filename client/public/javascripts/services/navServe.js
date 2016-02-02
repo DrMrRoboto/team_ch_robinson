@@ -7,7 +7,7 @@ app.factory('navServe', [function () {
 				return true;
 			} else if(path === '/adminEvent/' + id) {
 				return true;
-			} else if(path === '/volunteerList') {
+			} else if(path === '/volunteerList/' + id) {
 				return true;
 			} else {
 				return false;

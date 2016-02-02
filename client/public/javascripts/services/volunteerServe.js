@@ -23,16 +23,11 @@ app.factory('volunteerServe',['$http',function($http){
          * Gets all volunteers from database, adds necessary fields to data before
          * @returns $http promise object
          */
-        getVolunteers: function(){
+        getVolunteers: function(shiftId){
             return $http({
                 method: 'get',
-                url: '/volunteers'
+                url: '/volunteers/' + shiftId
             }).then(function(response){
-                var data = [];
-                response.data.forEach(function(element){
-                    element.type = 'info';
-                    data.push(element);
-                });
                 return response.data;
             }, function(errorResponse){
                 return errorResponse.data
@@ -45,10 +40,11 @@ app.factory('volunteerServe',['$http',function($http){
          * @returns $http promise object
          */
 
-        postVolunteer: function(){
+        postVolunteer: function(newVolunteer){
             return $http({
                 method: 'post',
-                url: '/volunteers/' + volunteerId
+                data: newVolunteer,
+                url: '/volunteers/'
             }).then(function(response){
                 return response.data
             }, function(errorResponse){
