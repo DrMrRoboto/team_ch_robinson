@@ -52,7 +52,7 @@ block content
                                         li.pull-left
                                             a(href='/#/adminEvent') Create Event
                                         li.pull-right
-                                            a(href='/#/volunteerList' ng-show="showVolunteers()") Event Volunteer Report
+                                            a(ng-href='{{volunteerPath()}}' ng-show="showVolunteers()") Event Volunteer Report
                                         li.pull-right
                                             a(href='/#/adminEvent' ng-show="showBack()") Back to Event
                                     li.pull-right(ng-show="showSearch()")
