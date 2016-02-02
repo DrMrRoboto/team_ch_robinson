@@ -1,28 +1,39 @@
 <div class="volunteerListBreak"></div>
 <div>
-	<h2 class="text-center">{{event.name}} Volunteer Report</h2>
+	<h2>{{data.eventName}} Volunteer Report</h2>
 	<div class="volRepNav">
 		<button>Save</button>
 		<button>Export to CSV</button>
 	</div>
 	<table class="table table-bordered table-striped">
-		<tr>
-			<th>Task</th>
-			<th>Shift Time</th>
-			<th>Volunteer Name</th>
-			<th>Email Address</th>
-			<th>Phone</th>
-			<th>Shirt Size</th>
-			<th>Guests</th>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>{{volunteer.email}}</td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
+
+        <tr>
+            <th>Date</th>
+            <th>Task</th>
+            <th>Shift Time</th>
+            <th>Volunteer Name</th>
+            <th>Email Address</th>
+            <th>Phone</th>
+            <th>Shirt Size</th>
+            <th>Guests</th>
+        </tr>
+
+
+
+        <tr ng-repeat="row in displayData">
+            <td>{{row.date | date: 'EEE M/d'}}</td>
+            <td>{{row.taskName}}</td>
+            <td>{{row.startTime | time}}-{{row.endTime | time}}</td>
+            <td>{{row.volunteerName}}</td>
+            <td>{{row.volunteerEmail}}</td>
+            <td>{{row.volunteerPhone}}</td>
+            <td>{{row.volunteerShirt}}</td>
+            <td>
+                <ul>
+                    <li ng-repeat="guest in row.volunteerGuests">{{guest.name + ', ' + guest.shirtSize}}</li>
+                </ul>
+            </td>
+        </tr>
+
 	</table>
 </div>
