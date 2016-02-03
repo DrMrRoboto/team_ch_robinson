@@ -1,11 +1,12 @@
 <div class="userEventBreak"></div>
 <h2 class="text-center">{{event.title}}</h2>
+
 <div class="backdrop">
 	<p>Event Name: {{event.title}}</p>
 
 	<p>Event Time: {{event.startsAt | date: 'MMMM d, yyyy H:mm a'}} - {{event.endsAt | date: 'MMMM d, yyyy H:mm a'}}</p>
 
-	<p>Event Description</p>
+	<p>Event Description:</p>
 
 	<p>{{event.description}}</p>
 </div>
