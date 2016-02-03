@@ -37,7 +37,6 @@ h2 {
     height:180px;
 }
 .volRepNav {
-    float: right;
     margin: 5px;
 }
 fieldset {
@@ -147,7 +146,7 @@ fieldset {
 }
 
 .volunteerReportGrid {
-    width: 1000px;
+    width: 100%;
     height: 1000px;
 }
 .wrap {
