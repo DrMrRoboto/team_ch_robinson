@@ -17,4 +17,4 @@ angular.module('customFilters', []).filter('time', function() {
 			return (hours-12) + ':' + minutes + ' pm'
 		}
 	}
-})
+});
