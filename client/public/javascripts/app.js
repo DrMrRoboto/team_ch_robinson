@@ -1,4 +1,14 @@
-var app = angular.module('chrCalendarApp', ['ngRoute','mwl.calendar','ui.bootstrap', 'ui.bootstrap.datetimepicker', 'rzModule', 'customFilters']);
+var app = angular.module('chrCalendarApp', [
+  'ngRoute',
+  'ngTouch',
+  'ui.grid',
+  'ui.grid.edit',
+  'ui.grid.cellNav',
+  'mwl.calendar',
+  'ui.bootstrap',
+  'ui.bootstrap.datetimepicker',
+  'rzModule',
+  'customFilters']);
 
 app.config(function($routeProvider){
   $routeProvider
