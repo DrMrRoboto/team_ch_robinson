@@ -34,7 +34,7 @@ a:hover {
 	width: 100%;
 	height: 160px;
 	display: inline-block;
-	padding: 20px;
+	padding: 0;
 }
 #nav-search {
     margin-top: 1%;
@@ -114,7 +114,7 @@ a:hover {
 	border-top: 2px solid #f47b20;
 	border-bottom: 2px solid #f47b20;
 	background-color: #eee;
-    width: 79%;
+    width: 100%;
 	height: 25%;
 	margin: auto;
 	padding-bottom: 20px;
@@ -235,6 +235,9 @@ footer a:hover {
 	color: #FF6;
 }
 
+#main-menu.collapse {
+	width: 100%;
+}
 
 footer .social {
   	text-align: right;
@@ -267,7 +270,7 @@ footer .social li a:hover {
 @media (max-width:992px) {
 
 	.navbar-header {
-		padding-left: 15px;
+		padding-left: 0;
 	}
 
 	.navbar-right {
@@ -300,16 +303,6 @@ footer .social li a:hover {
 		margin-left: auto;
 	}
 
-	.second-discription h6 {
-		margin-top: 100px;
-		text-align: center;
-	}
-
-	.second-discription p {
-		text-align: center;
-		display: block;
-	}
-
 	.small-icons ul li {
 		margin: 15px 15px 0 15px;
 		display: inline-block;
@@ -327,30 +320,23 @@ footer .social li a:hover {
 		background-color: #b93c38;
 	}
 }
-
+.navbar-default .navbar-collapse {
+	width: 100%;
+}
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
 	border-color: transparent;
-	background: rgba(0, 120, 174, 0.9);
+	background: rgba(0, 120, 174, 0.1);
 	padding-top: 0;
 	padding-bottom: 5px;
 	margin-top: 0;
+	width: 100%;
 }
 
 /* Small devices (tablets, 768px and up) */
 @media (max-width:768px) {
-	.navbar-default .navbar-collapse, 
+	.navbar-default .navbar-collapse,
 	.navbar-default .navbar-form {
 		padding-top: 20px;
 	}
-	.map {
-		overflow: hidden;
-	}
-	.map img {
-		width: 100%;
-		text-align: center;
-		margin-right: auto;
-		margin-left: auto;
-		display: block;
-	}
- }
+}
