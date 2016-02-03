@@ -9,7 +9,7 @@
 	<p>{{event.description}}</p>
 </div>
 <div>
-	<table class="table table-bordered">
+	<table class="table table-bordered table-back table-condensed table-hover">
 		<tr>
 			<th>Task</th>
 			<th>Shift Date</th>
@@ -20,93 +20,113 @@
 		</tr>
 		<tr ng-repeat="shift in shifts">
 			<td>{{shift.task_name}}</td>
-			<td>{{shift.date}}</td>
+			<td>{{shift.date | date: 'MMM d, yyyy'}}</td>
 			<td>{{shift.startTime | time}} - {{shift.endTime | time}}</td>
-			<td>{{shift.slotsAvailable}} - {{shift.slotsUsed}}</td>
-			<td>{{volunteer.firstName}} {{volunteer.lastName}}</td>
+			<td>{{shift.slotsAvailable - shift.volunteers.length}}</td>
 			<td>
-				<button class="btn btn-default" data-toggle="modal" data-target="#signup">Sign-Up</button>
+				<p ng-repeat="volunteer in shift.volunteers">{{volunteer.firstName}} {{volunteer.lastName}}</p>
+			</td>
+			<td>
+				<button class="btn btn-default" data-toggle="modal" data-target="#{{shift._id}}"
+				        ng-hide="shift.slotsAvailable - shift.volunteers.length == 0">Sign-Up</button>
+				<div id='{{shift._id}}' class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Volunteer Sign-Up</h4>
+							</div>
+							<div class="modal-body">
+
+								<form class="form-horizontal" name="volunteerSignUp">
+									<div class="form-group-userEvent">
+										<label for="volunteerFirstName">First Name</label>
+										<input type="text" id="volunteerFirstName" name="volunteerFirstName"
+										       ng-model="newVolunteer.firstName" ng-pattern="/^[a-zA-Z]*$/" required>
+										<span class="error" ng-show="volunteerSignUp.volunteerFirstName.$error.required">Required!</span>
+										<span class="error" ng-show="volunteerSignUp.volunteerFirstName.$error.pattern">Alphanumeric only!</span>
+									</div>
+									<div class="form-group-userEvent">
+										<label for="volunteerLastName">Last Name</label>
+										<input type="text" id="volunteerLastName" name="volunteerLastName" ng-model="newVolunteer.lastName"
+										       ng-pattern="/^[a-zA-Z]*$/" required>
+										<span class="error" ng-show="volunteerSignUp.volunteerLastName.$error.required">Required!</span>
+										<span class="error" ng-show="volunteerSignUp.volunteerLastName.$error.pattern">Alphanumeric only!</span>
+									</div>
+									<div class="form-group-userEvent">
+										<label for="volunteerEmail">Email</label>
+										<input type="email" id="volunteerEmail" name="volunteerEmail" ng-model="newVolunteer.email" required>
+										<span class="error" ng-show="volunteerSignUp.volunteerEmail.$error.required">Required!</span>
+										<span class="error" ng-show="volunteerSignUp.volunteerEmail.$error.email">Invalid Email!</span>
+									</div>
+									<div class="form-group-userEvent">
+										<label for="volunteerPhone">Phone Number</label>
+										<input type="tel" id="volunteerPhone" ng-model="newVolunteer.phone">
+									</div>
+									<div class="form-group-userEvent">
+										<label for="volShirtSize">Shirt Size</label>
+										<select name="volShirtSize" id="volShirtSize" ng-model="newVolunteer.shirtSize">
+											<option>Men Small</option>
+											<option>Men Medium</option>
+											<option>Men Large</option>
+											<option>Men XL</option>
+											<option>Men XXL</option>
+											<option>Men XXXL</option>
+											<option>Women Small</option>
+											<option>Women Medium</option>
+											<option>Women Large</option>
+											<option>Women XL</option>
+											<option>Women XXL</option>
+											<option>Women XXXL</option>
+											<option>Child Small</option>
+											<option>Child Medium</option>
+											<option>Child Large</option>
+										</select>
+									</div>
+									<hr>
+									<div class="form-group-userEvent row">
+										<div class="form-group">
+											<label for="guestName">Guest Name</label>
+											<input type="text" id="guestName" ng-model="newGuest.name">
+										</div>
+										<div class="form-group">
+											<label for="guestShirtSize">Shirt Size</label>
+											<select name="guestShirtSize" id="guestShirtSize" ng-model="newGuest.shirtSize">
+												<option>Men Small</option>
+												<option>Men Medium</option>
+												<option>Men Large</option>
+												<option>Men XL</option>
+												<option>Men XXL</option>
+												<option>Men XXXL</option>
+												<option>Women Small</option>
+												<option>Women Medium</option>
+												<option>Women Large</option>
+												<option>Women XL</option>
+												<option>Women XXL</option>
+												<option>Women XXXL</option>
+												<option>Child Small</option>
+												<option>Child Medium</option>
+												<option>Child Large</option>
+											</select>
+										</div>
+										<button class="btn btn-default" ng-click="addGuest()">Add Guest</button>
+									</div>
+								</form>
+
+								<div>
+									<p ng-repeat="guest in guests">{{guest}}</p>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" ng-disabled="volunteerSignUp.$invalid" class="btn btn-default" ng-click="saveVolunteer(shift._id)" data-dismiss="modal">
+									Submit</button>
+								<button type="button" class="btn btn-default" ng-click="clearGuests()" data-dismiss="modal">
+									Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</td>
 		</tr>
 	</table>
 </div>
-
-<div id="signup" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Volunteer Sign-Up</h4>
-			</div>
-			<div class="modal-body">
-				<form class="form-horizontal">
-					<div class="form-group-userEvent">
-						<label for="volunteerFirstName">First Name</label>
-						<input type="text" id="volunteerFirstName" required>
-					</div>
-					<div class="form-group-userEvent">
-						<label for="volunteerLastName">Last Name</label>
-						<input type="text" id="volunteerLastName"  required>
-					</div>
-					<div class="form-group-userEvent">
-						<label for="volunteerEmail">Email</label>
-						<input type="email" id="volunteerEmail" required>
-					</div>
-					<div class="form-group-userEvent">
-						<label for="volunteerPhone">Phone Number</label>
-						<input type="tel" id="volunteerPhone">
-					</div>
-					<div class="form-group-userEvent">
-						<label for="volShirtSize">Shirt Size</label>
-						<select name="volShirtSize" id="volShirtSize">
-							<option>Men Small</option>
-							<option>Men Medium</option>
-							<option>Men Large</option>
-							<option>Men XL</option>
-							<option>Men XXL</option>
-							<option>Men XXXL</option>
-							<option>Women Small</option>
-							<option>Women Medium</option>
-							<option>Women Large</option>
-							<option>Women XL</option>
-							<option>Women XXL</option>
-							<option>Women XXXL</option>
-							<option>Child Small</option>
-							<option>Child Medium</option>
-							<option>Child Large</option>
-						</select>
-					</div>
-					<hr>
-					<div class="form-group-userEvent">
-						<label for="guestName">Guest Name</label>
-						<input type="text" id="guestName">
-						<label for="guestShirtSize">Shirt Size</label>
-						<select name="guestShirtSize" id="guestShirtSize">
-							<option>Men Small</option>
-							<option>Men Medium</option>
-							<option>Men Large</option>
-							<option>Men XL</option>
-							<option>Men XXL</option>
-							<option>Men XXXL</option>
-							<option>Women Small</option>
-							<option>Women Medium</option>
-							<option>Women Large</option>
-							<option>Women XL</option>
-							<option>Women XXL</option>
-							<option>Women XXXL</option>
-							<option>Child Small</option>
-							<option>Child Medium</option>
-							<option>Child Large</option>
-						</select>
-						<button class="btn btn-default">Add Guest</button>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default">Submit</button>
-				<button type="button" class="btn btn-default" ng-click="insert(volunteer)" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-
