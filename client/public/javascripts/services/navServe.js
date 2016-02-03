@@ -25,9 +25,7 @@ app.factory('navServe', [function () {
 		},
 
 		showVolunteers: function(path, id) {
-			if (path === '/adminEvent') {
-				return true;
-			} else if (path === '/adminEvent/' + id){
+			if (path === '/adminEvent/' + id){
 				return true;
 			} else {
 				return false;
