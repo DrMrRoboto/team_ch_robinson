@@ -22,27 +22,27 @@
           <input id="startTime" type="text" class="form-control" datetime="yyyy-MM-dd HH:mm"
                  datetime-picker="dd MMM yyyy h:mm a" ng-model="event.startsAt" is-open="startAtOpen"
                  ng-click="openStartAt($event, prop)" required/>
-          <span class="error" ng-show="adminEventForm.eventName.$error.required"></span>
+          <span class="error" ng-show="adminEventForm.startTime.$error.required"></span>
         </div>
         <div class="input-group">
           <label for="endTime">Event End Date/Time</label>
           <input id="endTime" type="text" class="form-control" datetime="yyyy-MM-dd HH:mm"
                  datetime-picker="dd MMM yyyy h:mm a" ng-model="event.endsAt" is-open="endAtOpen"
                  ng-click="openEndAt($event, prop)" required/>
-          <span class="error" ng-show="adminEventForm.eventName.$error.required">This is required!</span>
+          <span class="error" ng-show="adminEventForm.endTime.$error.required"></span>
         </div>
         <div class="input-group">
           <label for="eventDescription">Event Description</label>
           <textarea id="eventDescription" class="form-control" type="text" name="eventDescription"
                     ng-model="event.description" required></textarea>
-          <span class="error" ng-show="adminEventForm.eventName.$error.required"></span>
+          <span class="error" ng-show="adminEventForm.eventDescription.$error.required"></span>
         </div>
       </form>
     </div>
     <div class="col-md-3">
       <button class="btn btn-default" type="button" ng-click="saveEvent()" ng-disabled="adminEventForm.$invalid">Save</button>
-      <button class="btn btn-default" type="button">Copy</button>
-      <button class="btn btn-default" type="button">Delete</button>
+      <button class="btn btn-default" type="button" ng-show="event._id">Copy</button>
+      <button class="btn btn-default" type="button" ng-show="event._id">Delete</button>
     </div>
   </div>
 
