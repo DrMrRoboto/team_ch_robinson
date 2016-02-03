@@ -121,5 +121,7 @@ fieldset {
 .volunteerReportGrid {
     width: 1000px;
     height: 1000px;
-
+}
+.wrap {
+    white-space: pre-wrap;
 }
