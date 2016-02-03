@@ -14,29 +14,33 @@
         </div>
         <div class="input-group">
           <label for="eventName">Event Name</label>
-          <input class="form-control" type="text" name="eventName" ng-model="event.title" id="eventName">
+          <input class="form-control" type="text" name="eventName" ng-model="event.title" id="eventName" required>
+          <span class="error" ng-show="adminEventForm.eventName.$error.required"></span>
         </div>
         <div class="input-group">
           <label for="startTime">Event Start Date/Time</label>
           <input id="startTime" type="text" class="form-control" datetime="yyyy-MM-dd HH:mm"
                  datetime-picker="dd MMM yyyy h:mm a" ng-model="event.startsAt" is-open="startAtOpen"
-                 ng-click="openStartAt($event, prop)"/>
+                 ng-click="openStartAt($event, prop)" required/>
+          <span class="error" ng-show="adminEventForm.eventName.$error.required"></span>
         </div>
         <div class="input-group">
           <label for="endTime">Event End Date/Time</label>
           <input id="endTime" type="text" class="form-control" datetime="yyyy-MM-dd HH:mm"
                  datetime-picker="dd MMM yyyy h:mm a" ng-model="event.endsAt" is-open="endAtOpen"
-                 ng-click="openEndAt($event, prop)"/>
+                 ng-click="openEndAt($event, prop)" required/>
+          <span class="error" ng-show="adminEventForm.eventName.$error.required">This is required!</span>
         </div>
         <div class="input-group">
           <label for="eventDescription">Event Description</label>
           <textarea id="eventDescription" class="form-control" type="text" name="eventDescription"
-                    ng-model="event.description"></textarea>
+                    ng-model="event.description" required></textarea>
+          <span class="error" ng-show="adminEventForm.eventName.$error.required"></span>
         </div>
       </form>
     </div>
     <div class="col-md-3">
-      <button class="btn btn-default" type="button" ng-click="saveEvent()">Save</button>
+      <button class="btn btn-default" type="button" ng-click="saveEvent()" ng-disabled="adminEventForm.$invalid">Save</button>
       <button class="btn btn-default" type="button">Copy</button>
       <button class="btn btn-default" type="button">Delete</button>
     </div>
