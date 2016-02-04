@@ -6,16 +6,25 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 
 	//ui-grid configurations
 	$scope.gridOptions = {};
-
+	//row height for entire grid(dynamic heights not available
 	$scope.gridOptions.rowHeight = 100;
-
+	//event that sends updated volunteer to database after change
 	$scope.gridOptions.onRegisterApi= function(gridApi){
-		console.log(gridApi);
 		$scope.gridApi = gridApi;
 		$scope.gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue){
 			if(newValue !== oldValue){
-				guestUnparser(rowEntity.volunteerGuests);
-				//volunteerServe.updateVolunteer(rowEntity.id, )
+				var updatedVolunteer = {
+					firstName: rowEntity.volunteerName.split(' ')[0],
+					lastName: rowEntity.volunteerName.split(' ')[1],
+					email: rowEntity.volunteerEmail,
+					phone: rowEntity.volunteerPhone,
+					shirtSize: rowEntity.volunteerShirt,
+					guests: rowEntity.volunteerGuests.split(','),
+					shift_id: rowEntity.shift_id
+				};
+				volunteerServe.updateVolunteer(rowEntity.id, updatedVolunteer).then(function(response){
+					rowEntity.volunteerGuests = guestParser(response.guests);
+				});
 			}
 		});
 	};
@@ -26,13 +35,12 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 
 	var templateForTextWrap = '<div class="ui-grid-cell-contents wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
 
-	var guestTemplate= '<div ng-repeat="guest in COL_FIELD" class="ui-grid-cell-contents wrap" title="TOOLTIP">{{COL_FILED CUSTOM_FILTERS}}</div>'
-
+	//column definitions, widths must be defined manually
 	$scope.gridOptions.columnDefs = [
 		{name: 'date', displayName: 'Date', enableCellEdit: false,
 			cellFilter: 'date: "EEE M/d"', width: '6%',cellTemplate: templateForTextWrap},
 		{name: 'taskName', displayName: 'Task', enableCellEdit: false,
-			width: '20%', cellTemplate: templateForTextWrap},
+			width: '15%', cellTemplate: templateForTextWrap},
 		{name: 'shiftTime', displayName: 'Shift', enableCellEdit: false,
 			width: '7%', cellTemplate: templateForTextWrap},
 			//enableCellEditOnFocus: false changes cell edit to be on double click
@@ -43,8 +51,8 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 		{name: 'volunteerPhone', displayName: 'Phone', enableCellEditOnFocus: false,
 			width:'10%',cellTemplate: templateForTextWrap},
 		{name: 'volunteerShirt', displayName: 'Shirt Size', enableCellEditOnFocus: false,
-			width: '5%',cellTemplate: templateForTextWrap},
-		{name: 'volunteerGuests', displayName: 'Guests', enableCellEditOnFocus: false,
+			width: '10%',cellTemplate: templateForTextWrap},
+		{name: 'volunteerGuests', displayName: 'Guests (seperate by comma)', enableCellEditOnFocus: false,
 			width: '24%',cellTemplate: templateForTextWrap},
 	];
 
@@ -69,7 +77,8 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 						for (var i = 0; i < element.slotsAvailable; i++) {
 							if (response[i]) {
 								var newTableObject = {
-									id: element._id,
+									id: response[i]._id,
+									shift_id: element._id,
 									taskName: element.task_name,
 									date: element.date,
 									shiftTime: timeConverter(element.startTime) + '-' + timeConverter(element.endTime),
@@ -82,6 +91,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 							} else {
 								var newTableObject = {
 									id: element._id,
+									shift_id: element.shift_id,
 									taskName: element.task_name,
 									date: element.date,
 									shiftTime: timeConverter(element.startTime) + '-' + timeConverter(element.endTime),
@@ -137,20 +147,12 @@ function timeConverter (time){
 function guestParser(array){
 	var guestString = '';
 	for(var i = 0; i < array.length; i++){
-		guestString += array[i] + '\n';
+		if(i !== array.length - 1) {
+			guestString += array[i] + ',\n';
+		} else {
+			guestString += array[i];
+		}
 	}
 	return guestString;
 }
 
-/**
- * Converts a string of guest data into array of different guests
- * @param string
- */
-function guestUnparser(string){
-	var guestArray = [];
-	for(var i = 0; i<string.length;i++){
-		//if(string[i] === '\n')
-		console.log(string[i]);
-	}
-
-}
