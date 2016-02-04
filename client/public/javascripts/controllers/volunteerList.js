@@ -27,11 +27,13 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 				});
 			}
 		});
+		$scope.export = function(){
+			$scope.gridApi.exporter.csvExport('all','all');
+		}
 	};
 
 	$scope.gridOptions.enableCellEditOnFocus = true;
 	$scope.gridOptions.data = [];
-
 
 	var templateForTextWrap = '<div class="ui-grid-cell-contents wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
 
