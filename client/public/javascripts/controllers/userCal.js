@@ -2,8 +2,8 @@
  *
  * Created by chottinger on 1/21/16.
  */
-app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe',
-  function($scope, moment, calendarConfig, eventServe){
+app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$location',
+  function($scope, moment, calendarConfig, eventServe, $location){
 
   //sets eventData, but only after $http call in getEvents() is complete
   eventServe.getEvents().then(function(response){
@@ -27,5 +27,9 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe',
     //$scope.now is called within admin/user calendarView pages so that upcoming
     //and previous events are displayed within the context of 'today'
   $scope.now = moment();
+
+  $scope.eventClicked = function(event) {
+    $location.path('/userEvent/' + event._id)
+  };
 
 }]);
