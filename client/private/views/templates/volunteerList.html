@@ -2,9 +2,8 @@
 <div>
 	<h2 class="text-center">{{data.eventName}} Volunteer Report</h2>
 	<div class="volRepNav">
-		<button>Save</button>
-		<button>Export to CSV</button>
+		<button ng-click="export()">Export to CSV</button>
 	</div>
-	<div ui-grid="gridOptions" ui-grid-edit ui-grid-cellnav class="volunteerReportGrid">
+	<div ui-grid="gridOptions" ui-grid-edit ui-grid-exporter ui-grid-cellnav class="volunteerReportGrid">
 	</div>
 </div>
