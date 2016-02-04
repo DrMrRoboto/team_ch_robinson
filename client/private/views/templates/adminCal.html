@@ -45,13 +45,17 @@
     <div class="admin-future-list">
       <h4>Upcoming Events</h4>
       <div class="list-group">
-        <a class="list-group-item" ng-repeat="event in eventData | orderBy: 'startsAt' | limitTo: 5" ng-if="event.startsAt >= now" ng-href="#/adminEvent/{{event._id}}">{{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
+        <a class="list-group-item" ng-repeat="event in eventData | orderBy: 'startsAt' | limitTo: 5"
+           ng-if="event.startsAt >= now" ng-href="#/adminEvent/{{event._id}}">
+          {{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
       </div>
     </div>
     <div class="admin-past-list">
       <h4>Past Events</h4>
       <div class="list-group">
-        <a class="list-group-item" ng-repeat="event in eventData | orderBy: '-startsAt' | limitTo: 5" ng-if="event.startsAt < now" ng-href="#/adminEvent/{{event._id}}">{{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
+        <a class="list-group-item" ng-repeat="event in eventData | orderBy: '-startsAt' | limitTo: 5"
+           ng-if="event.startsAt < now" ng-href="#/adminEvent/{{event._id}}">
+          {{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
       </div>
     </div>
   </div>
