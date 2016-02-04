@@ -54,29 +54,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         };
     }
 
-    $scope.startAtOpen = false;
-    $scope.endAtOpen = false;
-    $scope.shiftDateOpen = false;
-
-    $scope.openStartAt = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        $scope.startAtOpen = true;
-    };
-    $scope.openEndAt = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        $scope.endAtOpen = true;
-    };
-    $scope.openShiftDate= function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        $scope.shiftDateOpen = true;
-    };
-
     $scope.saveEvent = function (){
         if($scope.event._id){
             eventServe.updateEvent($scope.event._id, $scope.event)
@@ -105,6 +82,7 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
                 $scope.tasks = response;
                 console.log($scope.tasks);
             });
+        $scope.loadAdminEvent();
         });
     };
 
