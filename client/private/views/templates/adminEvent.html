@@ -172,6 +172,11 @@
                 <th>Shift Time</th>
                 <th>Delete</th>
               </tr>
+              <tr ng-repeat="shift in task.shifts">
+                <td>{{shift.date | date:'MMM d, yyyy'}}</td>
+                <td>{{shift.startTime | time}} - {{shift.endTime | time}}</td>
+                <td><button ng-click="deleteShift(shift._id)">Delete</button></td>
+              </tr>
             </table>
           </div>
         </div>
