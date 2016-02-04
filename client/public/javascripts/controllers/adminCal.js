@@ -1,8 +1,8 @@
 /**
  * Created by chottinger on 1/21/16.
  */
-app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe',
-    function($scope, moment, calendarConfig, eventServe){
+app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe', '$location',
+    function($scope, moment, calendarConfig, eventServe, $location){
 
     eventServe.getEvents().then(function(response){
         $scope.eventData = response;
@@ -21,5 +21,9 @@ app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe',
     $scope.viewTitle = monthNames[$scope.viewDate.getMonth()];
 
     $scope.now = moment();
+
+    $scope.eventClicked = function(event) {
+        $location.path('/adminEvent/' + event._id)
+    };
 
 }]);
