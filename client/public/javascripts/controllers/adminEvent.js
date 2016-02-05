@@ -39,13 +39,13 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
       });
     };
 
-    $scope.copyEvent = {
+    $scope.copiedEvent = {
       startsAt: "",
       endsAt: ""
     }
 
     $scope.copyEvent = function() {
-      copyServe.copyEvent($routeParams.id, $scope.copyEvent.startsAt, $scope.copyEvent.endsAt);
+      copyServe.copyEvent($routeParams.id, $scope.copiedEvent.startsAt, $scope.copiedEvent.endsAt);
     };
 
   /**
