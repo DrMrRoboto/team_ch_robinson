@@ -24,13 +24,16 @@
 			<td>{{shift.task_name}}</td>
 			<td>{{shift.date | date: 'MMM d, yyyy'}}</td>
 			<td>{{shift.startTime | time}} - {{shift.endTime | time}}</td>
-			<td>{{shift.slotsAvailable - shift.volunteers.length}}</td>
+			<td>{{shift.slotsAvailable - shift.slotsUsed}}</td>
 			<td>
-				<p ng-repeat="volunteer in shift.volunteers">{{volunteer.firstName}} {{volunteer.lastName}}</p>
+				<div ng-repeat="volunteer in shift.volunteers">
+					<p>{{volunteer.firstName}} {{volunteer.lastName}}</p>
+					<p ng-repeat="guest in volunteer.guests">{{guest.name}}</p>
+				</div>
 			</td>
 			<td>
 				<button class="btn btn-default" data-toggle="modal" data-target="#{{shift._id}}"
-				        ng-hide="shift.slotsAvailable - shift.volunteers.length == 0">Sign-Up</button>
+				        ng-hide="shift.slotsAvailable - shift.slotsUsed == 0">Sign-Up</button>
 				<div id='{{shift._id}}' class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -111,12 +114,14 @@
 												<option>Child Large</option>
 											</select>
 										</div>
-										<button class="btn btn-default" ng-click="addGuest()">Add Guest</button>
+										<button class="btn btn-default" ng-click="addGuest()"
+										        ng-disabled="shift.slotsAvailable - shift.volunteers.length - guests.length - 1 == 0">
+											Add Guest</button>
 									</div>
 								</form>
 
 								<div class="volunteer-guests">
-									<p ng-repeat="guest in guests">{{guest}}</p>
+									<p ng-repeat="guest in guests">{{guest.name}} {{guest.shirtSize}}</p>
 								</div>
 							</div>
 							<div class="modal-footer">
