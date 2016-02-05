@@ -14,7 +14,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
       eventServe.getEvent($routeParams.id).then(function(response){
         $scope.event = response;
         taskServe.getTasks($routeParams.id).then(function(response){
-          console.log(response);
           $scope.tasks = response;
           $scope.tasks.forEach(function(element){
             element.slider = {
@@ -115,6 +114,7 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         $scope.newShift.slotsAvailable = shiftSlots;
         $scope.newShift.task_id = taskId;
         $scope.newShift.task_name = taskName;
+        $scope.newShift.slotsUsed = 0;
 
         for(var i = 0; i<(end-start)/length; i++) {
             $scope.newShift.startTime = start + (i * length);
