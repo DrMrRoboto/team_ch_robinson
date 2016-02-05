@@ -40,13 +40,16 @@
 				events="eventData"
 				view="view"
 				view-date="viewDate"
-				view-title="viewTitle">
+				view-title="viewTitle"
+				on-event-click="eventClicked(calendarEvent)">
 			</mwl-calendar>
 		</div>
 		<div class="user-event-list">
 			<h4>Upcoming Events</h4>
 			<div class="list-group">
-				<a class="list-group-item" ng-repeat="event in eventData | limitTo: 10 | orderBy: 'startsAt'" ng-if="event.startsAt >= now" ng-href="#/userEvent/{{event._id}}">{{event.title}} - {{event.startsAt | date: 'MMMM d, yyyy H:mm a'}}</a>
+				<a class="list-group-item" ng-repeat="event in eventData | limitTo: 10 | orderBy: 'startsAt'"
+				ng-if="event.startsAt >= now" ng-href="#/userEvent/{{event._id}}">
+				{{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
 			</div>
 		</div>
 	</div>

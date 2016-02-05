@@ -1,5 +1,5 @@
 <div class="adminEventBreak"></div>
-<h2 class="text-center">Event</h2>
+<h2 class="text-center">{{event.title}} Event</h2>
 <div class="container">
   <div class="row">
     <div class="col-md-1"></div>
@@ -19,16 +19,32 @@
         </div>
         <div class="input-group">
           <label for="startTime">Event Start Date/Time</label>
-          <input id="startTime" type="text" class="form-control" datetime="yyyy-MM-dd HH:mm"
-                 datetime-picker="dd MMM yyyy h:mm a" ng-model="event.startsAt" is-open="startAtOpen"
-                 ng-click="openStartAt($event, prop)" required/>
+          <input
+            id="startTime"
+            type="text"
+            class="form-control"
+            datetime="yyyy-MM-dd HH:mm"
+            datetime-picker="dd MMM yyyy h:mm a"
+            ng-model="event.startsAt"
+            is-open="startAtOpen"
+            ng-click="startAtOpen = true"
+            required
+          />
           <span class="error" ng-show="adminEventForm.startTime.$error.required"></span>
         </div>
         <div class="input-group">
           <label for="endTime">Event End Date/Time</label>
-          <input id="endTime" type="text" class="form-control" datetime="yyyy-MM-dd HH:mm"
-                 datetime-picker="dd MMM yyyy h:mm a" ng-model="event.endsAt" is-open="endAtOpen"
-                 ng-click="openEndAt($event, prop)" required/>
+          <input
+            id="endTime"
+            type="text"
+            class="form-control"
+            datetime="yyyy-MM-dd HH:mm"
+            datetime-picker="dd MMM yyyy h:mm a"
+            ng-model="event.endsAt"
+            is-open="endAtOpen"
+            ng-click="endAtOpen = true"
+            required
+          />
           <span class="error" ng-show="adminEventForm.endTime.$error.required"></span>
         </div>
         <div class="input-group">
@@ -116,7 +132,8 @@
               </div>
             </div>
 
-            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#{{task._id}}">New Shift</button>
+            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#{{task._id}}">
+              New Shift</button>
             <div id="{{task._id}}" class="modal fade" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -129,9 +146,20 @@
                   <div>
                     <form>
                       <div class="input-group">
-                        <input id="shiftDate" type="text" placeholder="Enter Shift Date"
-                               datetime-picker="MMMM d, yyyy" enable-time="false" ng-model="shiftDate"
-                               is-open="shiftDateOpen" ng-click="openShiftDate($event, prop)"/>
+                        <input
+                           type="text"
+                           placeholder="Enter Shift Date"
+                           min-date="event.startsAt"
+                           max-date="event.endsAt"
+                           datetime-picker="MMMM d, yyyy"
+                           datetime="yyyy-MM-dd"
+                           enable-time="false"
+                           ng-model="shiftDate"
+                           is-open="shiftDateOpen"
+                           ng-click="shiftDateOpen = true"
+                           show-button-bar = 'false'
+                           required
+                        />
                       </div>
                       <label for="shiftTime">Time Range of Task</label>
                       <div>
@@ -171,6 +199,11 @@
                 <th>Shift Date</th>
                 <th>Shift Time</th>
                 <th>Delete</th>
+              </tr>
+              <tr ng-repeat="shift in task.shifts">
+                <td>{{shift.date | date:'MMM d, yyyy'}}</td>
+                <td>{{shift.startTime | time}} - {{shift.endTime | time}}</td>
+                <td><button ng-click="deleteShift(shift._id)">Delete</button></td>
               </tr>
             </table>
           </div>

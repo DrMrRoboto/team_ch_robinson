@@ -10,33 +10,40 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
    */
     $scope.tasks = [];
 
+    $scope.loadAdminEvent = function(){
+      eventServe.getEvent($routeParams.id).then(function(response){
+        $scope.event = response;
+        taskServe.getTasks($routeParams.id).then(function(response){
+          console.log(response);
+          $scope.tasks = response;
+          $scope.tasks.forEach(function(element){
+            element.slider = {
+              min: 480,
+              max: 1020,
+              options: {
+                floor:0,
+                ceil:1440,
+                step: 30,
+                draggableRange: true,
+                minRange: 30,
+                showSelectionBar: true,
+                showSelectionBarEnd: true,
+                hideLimitLabels: true
+              }
+            };
+            shiftServe.getShifts(element._id).then(function(response) {
+              element.shifts = response;
+            })
+          });
+        });
+      });
+    };
+
   /**
    * If an event ID is passed to the URL. This pulls down the information for a specific Event
    */
     if($routeParams.id){
-        eventServe.getEvent($routeParams.id).then(function(response){
-            $scope.event = response;
-            taskServe.getTasks($routeParams.id).then(function(response){
-                console.log(response);
-                $scope.tasks = response;
-                $scope.tasks.forEach(function(element){
-                    element.slider = {
-                        min: 480,
-                        max: 1020,
-                        options: {
-                            floor:0,
-                            ceil:1440,
-                            step: 30,
-                            draggableRange: true,
-                            minRange: 30,
-                            showSelectionBar: true,
-                            showSelectionBarEnd: true,
-                            hideLimitLabels: true
-                        }
-                    }
-                });
-            });
-        });
+        $scope.loadAdminEvent();
     } else {
         $scope.event = {
             title: "",
@@ -46,29 +53,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
             host: ""
         };
     }
-
-    $scope.startAtOpen = false;
-    $scope.endAtOpen = false;
-    $scope.shiftDateOpen = false;
-
-    $scope.openStartAt = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        $scope.startAtOpen = true;
-    };
-    $scope.openEndAt = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        $scope.endAtOpen = true;
-    };
-    $scope.openShiftDate= function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        $scope.shiftDateOpen = true;
-    };
 
     $scope.saveEvent = function (){
         if($scope.event._id){
@@ -98,6 +82,7 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
                 $scope.tasks = response;
                 console.log($scope.tasks);
             });
+        $scope.loadAdminEvent();
         });
     };
 
@@ -136,7 +121,13 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
             $scope.newShift.endTime = $scope.newShift.startTime + length;
             console.log($scope.newShift);
             shiftServe.createShift(angular.copy($scope.newShift));
-        }
+        };
+        $scope.loadAdminEvent();
     };
+
+    $scope.deleteShift = function(shiftId) {
+      shiftServe.deleteShift(shiftId);
+      $scope.loadAdminEvent();
+    }
 }]);
 
