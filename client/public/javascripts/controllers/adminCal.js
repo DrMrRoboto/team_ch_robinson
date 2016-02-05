@@ -5,7 +5,7 @@ app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe', '$
     function($scope, moment, calendarConfig, eventServe, $location){
 
     eventServe.getEvents().then(function(response){
-        $scope.eventData = response;
+        $scope.eventData = response
     });
 
     var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -20,7 +20,28 @@ app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe', '$
 
     $scope.viewTitle = monthNames[$scope.viewDate.getMonth()];
 
-    $scope.now = moment();
+    $scope.rightNow = function(){
+        return moment();
+    }
+    $scope.getPastEvents = function(events) {
+        var pastEvents = [];
+        for (event of events){
+            if (event.startsAt < moment()){
+                pastEvents.push(event);
+            };
+        };
+        return pastEvents;
+    };
+
+    $scope.getFutureEvents = function(events){
+        var futureEvents = [];
+        for (event of events){
+            if (event.startsAt >= moment()){
+                futureEvents.push(event);
+            };
+        };
+        return futureEvents;
+    };
 
     $scope.eventClicked = function(event) {
         $location.path('/adminEvent/' + event._id)
