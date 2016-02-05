@@ -31,6 +31,11 @@ app.controller('userEvent', ['$scope', '$routeParams', 'eventServe', 'taskServe'
 						$scope.shiftResponse.forEach(function(shift){
 							volunteerServe.getVolunteers(shift._id).then(function(response) {
 								shift.volunteers = response;
+								shift.volunteers.forEach(function(volunteer) {
+									shift.slotsUsed = 0;
+									shift.slotsUsed += 1;
+									shift.slotsUsed += volunteer.guests.length;
+								});
 								$scope.shifts.push(shift);
 							});
 						});
@@ -48,8 +53,7 @@ app.controller('userEvent', ['$scope', '$routeParams', 'eventServe', 'taskServe'
 		};
 
 		$scope.addGuest = function() {
-			var guest = $scope.newGuest.name + " - " + $scope.newGuest.shirtSize;
-			$scope.guests.push(guest);
+			$scope.guests.push($scope.newGuest);
 			$scope.newGuest = {
 				name: "",
 				shirtSize: ""
