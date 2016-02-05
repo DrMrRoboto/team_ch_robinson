@@ -14,7 +14,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
       eventServe.getEvent($routeParams.id).then(function(response){
         $scope.event = response;
         taskServe.getTasks($routeParams.id).then(function(response){
-          console.log(response);
           $scope.tasks = response;
           $scope.tasks.forEach(function(element){
             element.slider = {
