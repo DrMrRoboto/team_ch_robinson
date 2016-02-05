@@ -86,7 +86,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 									volunteerEmail: response[i].email,
 									volunteerPhone: response[i].phone,
 									volunteerShirt: response[i].shirtSize,
-									volunteerGuests: guestParser(response[i].guests)
+									volunteerGuests: response[i].guests
 								};
 							} else {
 								var newTableObject = {
@@ -103,7 +103,22 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 								};
 
 							}
+
 							$scope.gridOptions.data.push(newTableObject);
+							if(Array.isArray(newTableObject.volunteerGuests)){
+								var newGuest = {};
+								for (var index = 0; index < newTableObject.volunteerGuests.length; index++){
+									newGuest.volunteer_id = newTableObject.id;
+									newGuest.taskName = newTableObject.taskName;
+									newGuest.date = newTableObject.date;
+									newGuest.shiftTime = newTableObject.shiftTime;
+									newGuest.volunteerName = newTableObject.volunteerGuests[index].name;
+									newGuest.volunteerEmail = 'Guest of ' + newTableObject.volunteerName;
+									newGuest.volunteerPhone = 'Guest of ' + newTableObject.volunteerName;
+									newGuest.volunteerShirt = newTableObject.volunteerGuests[index].shirtSize;
+
+								}
+							}
 							element.volunteers = response;
 						}
 					});
