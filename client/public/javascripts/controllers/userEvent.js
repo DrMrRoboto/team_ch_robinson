@@ -36,6 +36,8 @@ app.controller('userEvent', ['$scope', '$routeParams', 'eventServe', 'taskServe'
 									shift.slotsUsed += 1;
 									shift.slotsUsed += volunteer.guests.length;
 								});
+								console.log(shift);
+								shiftServe.updateShift(shift._id, shift);
 								$scope.shifts.push(shift);
 							});
 						});
@@ -61,6 +63,7 @@ app.controller('userEvent', ['$scope', '$routeParams', 'eventServe', 'taskServe'
 		};
 
 		$scope.saveVolunteer = function(shiftId) {
+			console.log(shift);
 			$scope.shifts = [];
 			$scope.newVolunteer.shift_id = shiftId;
 			$scope.newVolunteer.guests = $scope.guests;

@@ -115,6 +115,7 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         $scope.newShift.slotsAvailable = shiftSlots;
         $scope.newShift.task_id = taskId;
         $scope.newShift.task_name = taskName;
+        $scope.newShift.slotsUsed = 0;
 
         for(var i = 0; i<(end-start)/length; i++) {
             $scope.newShift.startTime = start + (i * length);
