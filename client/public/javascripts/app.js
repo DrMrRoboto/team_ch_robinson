@@ -3,7 +3,7 @@ var app = angular.module('chrCalendarApp', [
   'ngTouch',
   'ui.grid',
   'ui.grid.edit',
-  'ui.grid.cellNav',
+  'ui.grid.exporter',
   'mwl.calendar',
   'ui.bootstrap',
   'ui.bootstrap.datetimepicker',
