@@ -39,6 +39,15 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
       });
     };
 
+    $scope.copyEvent = {
+      startsAt: "",
+      endsAt: ""
+    }
+
+    $scope.copyEvent = function() {
+      copyServe.copyEvent($routeParams.id, $scope.copyEvent.startsAt, $scope.copyEvent.endsAt);
+    };
+
   /**
    * If an event ID is passed to the URL. This pulls down the information for a specific Event
    */
@@ -89,6 +98,13 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
     $scope.clearNewTask = function(){
         $scope.newTask.name = '';
         $scope.newTask.description = '';
+    };
+
+    $scope.editTask = function(taskId, task) {
+      taskServe.updateTask(taskId, task)
+        .then(function() {
+          $scope.loadAdminEvent();
+        })
     };
 
 

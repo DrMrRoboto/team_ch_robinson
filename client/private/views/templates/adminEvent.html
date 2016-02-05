@@ -56,9 +56,60 @@
       </form>
     </div>
     <div class="col-md-3">
-      <button class="btn btn-default" type="button" ng-click="saveEvent()" ng-disabled="adminEventForm.$invalid">Save</button>
-      <button class="btn btn-default" type="button" ng-show="event._id">Copy</button>
+      <button class="btn btn-default" type="button" ng-click="saveEvent()" ng-disabled="adminEventForm.$invalid">
+        Save</button>
+      <button class="btn btn-default" type="button" ng-show="event._id" data-toggle="modal" data-target="#copyEvent">
+        Copy</button>
       <button class="btn btn-default" type="button" ng-show="event._id">Delete</button>
+    </div>
+    <div>
+      <div id="copyEvent" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Create New Task</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal">
+                <div class="input-group">
+                  <label for="newStartTime">New Event Start Date/Time</label>
+                  <input
+                    id="newStartTime"
+                    type="text"
+                    class="form-control"
+                    datetime="yyyy-MM-dd HH:mm"
+                    datetime-picker="dd MMM yyyy h:mm a"
+                    ng-model="copyEvent.startsAt"
+                    is-open="newStartAtOpen"
+                    ng-click="newStartAtOpen = true"
+                    required
+                  />
+                </div>
+                <div class="input-group">
+                  <label for="newEndTime">New Event End Date/Time</label>
+                  <input
+                    id="newEndTime"
+                    type="text"
+                    class="form-control"
+                    datetime="yyyy-MM-dd HH:mm"
+                    datetime-picker="dd MMM yyyy h:mm a"
+                    ng-model="copyEvent.endsAt"
+                    is-open="newEndAtOpen"
+                    ng-click="newEndAtOpen = true"
+                    required
+                  />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal"
+                      ng-click="copyEvent()">Copy Event</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -104,8 +155,9 @@
           <div class="col-md-6">
             <h4>{{task.name}}</h4>
             <p>{{task.description}}</p>
-            <button class="btn btn-default"  type="button" data-toggle="modal" data-target="#editTask">Edit Task</button>
-            <div id="editTask" class="modal fade" role="dialog">
+            <button class="btn btn-default"  type="button" data-toggle="modal" data-target="#edit{{task._id}}">Edit Task</button>
+
+            <div id="edit{{task._id}}" class="modal fade" role="dialog">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -116,25 +168,28 @@
                     <form class="form-horizontal">
                       <div class="form-group form-group-dropdown">
                         <label for="taskName">Task Name</label>
-                        <input class="form-control" type="text" id="taskName" name="taskName" required>
+                        <input class="form-control" type="text" id="taskName" name="taskName"
+                               ng-model="task.name" required>
                       </div>
                       <div class="form-group form-group-dropdown">
                         <label for="taskDesc">Description</label>
-                        <textarea class="form-control" id="taskDesc" name="taskDesc" required></textarea>
+                        <textarea class="form-control" id="taskDesc" name="taskDesc"
+                                  ng-model="task.description" required></textarea>
                       </div>
                     </form>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                            ng-click="editTask(task._id, task)">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
             </div>
 
-            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#{{task._id}}">
+            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#shift{{task._id}}">
               New Shift</button>
-            <div id="{{task._id}}" class="modal fade" role="dialog">
+            <div id="shift{{task._id}}" class="modal fade" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
