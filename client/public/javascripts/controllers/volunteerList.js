@@ -42,20 +42,18 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 		{name: 'date', displayName: 'Date', enableCellEdit: false,
 			cellFilter: 'date: "EEE M/d"', width: '6%',cellTemplate: templateForTextWrap},
 		{name: 'taskName', displayName: 'Task', enableCellEdit: false,
-			width: '15%', cellTemplate: templateForTextWrap},
+			width: '20%', cellTemplate: templateForTextWrap},
 		{name: 'shiftTime', displayName: 'Shift', enableCellEdit: false,
 			width: '7%', cellTemplate: templateForTextWrap},
 			//enableCellEditOnFocus: false changes cell edit to be on double click
 		{name: 'volunteerName', displayName: 'Volunteer', enableCellEditOnFocus: false,
 			width: '15%', cellTemplate: templateForTextWrap},
 		{name: 'volunteerEmail', displayName: 'E-mail', enableCellEditOnFocus: false,
-			width: '13%',cellTemplate: templateForTextWrap},
+			width: '25%',cellTemplate: templateForTextWrap},
 		{name: 'volunteerPhone', displayName: 'Phone', enableCellEditOnFocus: false,
-			width:'10%',cellTemplate: templateForTextWrap},
+			width:'17%',cellTemplate: templateForTextWrap},
 		{name: 'volunteerShirt', displayName: 'Shirt Size', enableCellEditOnFocus: false,
-			width: '10%',cellTemplate: templateForTextWrap},
-		{name: 'volunteerGuests', displayName: 'Guests (seperate by comma)', enableCellEditOnFocus: false,
-			width: '24%',cellTemplate: templateForTextWrap},
+			width: '10%',cellTemplate: templateForTextWrap}
 	];
 
 
@@ -75,9 +73,11 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 			shiftServe.getShifts(element._id).then(function (response) {
 				element.shifts = response;
 				element.shifts.forEach(function (element) {
+					console.log(element);
 					volunteerServe.getVolunteers(element._id).then(function (response) {
-						for (var i = 0; i < element.slotsAvailable; i++) {
-							if (response[i]) {
+						var i = 0;
+						while(i < element.slotsAvailable) {
+							if (i < element.slotsUsed) {
 								var newTableObject = {
 									id: response[i]._id,
 									shift_id: element._id,
@@ -90,6 +90,27 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 									volunteerShirt: response[i].shirtSize,
 									volunteerGuests: response[i].guests
 								};
+
+								$scope.gridOptions.data.push(newTableObject);
+
+								i++;
+
+
+
+								for (var index = 0; index < newTableObject.volunteerGuests.length; index++){
+									var newGuest = {};
+									newGuest.volunteer_id = newTableObject.id;
+									newGuest.taskName = newTableObject.taskName;
+									newGuest.date = newTableObject.date;
+									newGuest.shiftTime = newTableObject.shiftTime;
+									newGuest.volunteerName = newTableObject.volunteerGuests[index].name;
+									newGuest.volunteerEmail = 'Guest of ' + newTableObject.volunteerName;
+									newGuest.volunteerPhone = 'Guest of ' + newTableObject.volunteerName;
+									newGuest.volunteerShirt = newTableObject.volunteerGuests[index].shirtSize;
+									$scope.gridOptions.data.push(newGuest);
+									i++;
+								}
+
 							} else {
 								var newTableObject = {
 									id: element._id,
@@ -103,24 +124,12 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 									volunteerShirt: '',
 									volunteerGuests: ''
 								};
-
+								$scope.gridOptions.data.push(newTableObject);
+								i++;
 							}
 
-							$scope.gridOptions.data.push(newTableObject);
-							if(Array.isArray(newTableObject.volunteerGuests)){
-								var newGuest = {};
-								for (var index = 0; index < newTableObject.volunteerGuests.length; index++){
-									newGuest.volunteer_id = newTableObject.id;
-									newGuest.taskName = newTableObject.taskName;
-									newGuest.date = newTableObject.date;
-									newGuest.shiftTime = newTableObject.shiftTime;
-									newGuest.volunteerName = newTableObject.volunteerGuests[index].name;
-									newGuest.volunteerEmail = 'Guest of ' + newTableObject.volunteerName;
-									newGuest.volunteerPhone = 'Guest of ' + newTableObject.volunteerName;
-									newGuest.volunteerShirt = newTableObject.volunteerGuests[index].shirtSize;
 
-								}
-							}
+
 							element.volunteers = response;
 						}
 					});
@@ -130,6 +139,8 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 	});
 
 }]);
+
+
 
 /**
  * Function that takes in time in minutes elapsed and converts it into appropriate H:MM AM/PM

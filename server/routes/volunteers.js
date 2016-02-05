@@ -11,6 +11,13 @@ router.get('/:id', function(req, res, next) {
 	});
 });
 
+router.get('/report/:id', function(req, res, next){
+	var shiftID = req.params.id;
+	Volunteer.find({shift_id: shiftID}, function(err, data){
+
+	})
+})
+
 /*POST new Volunteer*/
 router.post('/', function(req, res, next) {
 	var newVolunteer = req.body;
