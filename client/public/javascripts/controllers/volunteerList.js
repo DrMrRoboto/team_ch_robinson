@@ -67,28 +67,25 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 
 	//fetches tasks, then shifts, then volunteers, placing the data
 	// in the right format for the grid (empty rows for unoccupied shifts as well)
-	taskServe.getTasks($routeParams.id).then(function(response) {
-		$scope.data.tasks = response;
-		$scope.data.tasks.forEach(function (element) {
-			shiftServe.getShifts(element._id).then(function (response) {
-				element.shifts = response;
-				element.shifts.forEach(function (element) {
-					console.log(element);
-					volunteerServe.getVolunteers(element._id).then(function (response) {
+	taskServe.getTasks($routeParams.id).then(function(taskResponse) {
+		taskResponse.forEach(function (task) {
+			shiftServe.getShifts(task._id).then(function (shiftResponse) {
+				shiftResponse.forEach(function (shift) {
+					volunteerServe.getVolunteers(shift._id).then(function (volunteerResponse) {
 						var i = 0;
-						while(i < element.slotsAvailable) {
-							if (i < element.slotsUsed) {
+						while(i < shift.slotsAvailable) {
+							if (i < shift.slotsUsed) {
 								var newTableObject = {
-									id: response[i]._id,
-									shift_id: element._id,
-									taskName: element.task_name,
-									date: element.date,
-									shiftTime: timeConverter(element.startTime) + '-' + timeConverter(element.endTime),
-									volunteerName: response[i].firstName + ' ' + response[i].lastName,
-									volunteerEmail: response[i].email,
-									volunteerPhone: response[i].phone,
-									volunteerShirt: response[i].shirtSize,
-									volunteerGuests: response[i].guests
+									id: volunteerResponse[i]._id,
+									shift_id: shift._id,
+									taskName: shift.task_name,
+									date: shift.date,
+									shiftTime: timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime),
+									volunteerName: volunteerResponse[i].firstName + ' ' + volunteerResponse[i].lastName,
+									volunteerEmail: volunteerResponse[i].email,
+									volunteerPhone: volunteerResponse[i].phone,
+									volunteerShirt: volunteerResponse[i].shirtSize,
+									volunteerGuests: volunteerResponse[i].guests
 								};
 
 								$scope.gridOptions.data.push(newTableObject);
@@ -113,11 +110,11 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 
 							} else {
 								var newTableObject = {
-									id: element._id,
-									shift_id: element.shift_id,
-									taskName: element.task_name,
-									date: element.date,
-									shiftTime: timeConverter(element.startTime) + '-' + timeConverter(element.endTime),
+									id: shift._id,
+									shift_id: shift.shift_id,
+									taskName: shift.task_name,
+									date: shift.date,
+									shiftTime: timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime),
 									volunteerName: '',
 									volunteerEmail: '',
 									volunteerPhone: '',
@@ -130,7 +127,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 
 
 
-							element.volunteers = response;
+							shift.volunteers = response;
 						}
 					});
 				});
