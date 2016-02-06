@@ -7,7 +7,7 @@
     <div class="col-md-6 text-center">
       <div class="btn-group">
         <button
-          class="btn btn-primary" ng-show="viewDate > now"
+          class="btn btn-primary" ng-hide="viewDate <= now"
           mwl-date-modifier
           date="viewDate"
           decrement="view">
@@ -47,7 +47,7 @@
 		<div class="user-event-list">
 			<h4>Upcoming Events</h4>
 			<div class="list-group">
-				<a class="list-group-item" ng-repeat="event in eventData | limitTo: 10 | orderBy: 'startsAt'"
+				<a class="list-group-item" ng-repeat="event in getFutureEvents(eventData) | limitTo: 6 | orderBy: 'startsAt'"
 				ng-if="event.startsAt >= now" ng-href="#/userEvent/{{event._id}}">
 				{{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
 			</div>
