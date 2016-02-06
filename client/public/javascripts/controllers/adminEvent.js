@@ -107,6 +107,13 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         })
     };
 
+    $scope.deleteTask = function(taskId) {
+      taskServe.deleteTask(taskId)
+        .then(function() {
+          $scope.loadAdminEvent();
+        })
+    }
+
 
     $scope.newShift = {
         date: "",
