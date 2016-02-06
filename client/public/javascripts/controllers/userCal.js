@@ -31,4 +31,14 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$
     $location.path('/userEvent/' + event._id)
   };
 
+  $scope.getFutureEvents = function(events){
+    var futureEvents = [];
+    for (event of events){
+      if (event.startsAt >= moment()){
+        futureEvents.push(event);
+      };
+    };
+    return futureEvents;
+  };
+
 }]);
