@@ -12,19 +12,41 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 	$scope.gridOptions.onRegisterApi= function(gridApi){
 		$scope.gridApi = gridApi;
 		$scope.gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue){
-			if(newValue !== oldValue){
+			if(newValue == oldValue){return}
+
+			if(rowEntity.volunteer_id){
+				volunteerServe.getVolunteer(rowEntity.volunteer_id).then(function(response){
+					var updatedVolunteer = response;
+					updatedVolunteer.guests[rowEntity.guestArrayIndex]= {
+						name: rowEntity.volunteerName,
+						shirtSize: rowEntity.volunteerShirt
+					}
+					volunteerServe.postVolunteer(updatedVolunteer._id);
+				});
+			} else if (rowEntity.volunteerName !== '' &&
+			rowEntity.volunteerEmail !== '' &&
+			oldValue == '') {
+				var newVolunteer = {
+					firstName: rowEntity.volunteerName.split(' ')[0],
+					lastName: rowEntity.volunteerName.split(' ')[1],
+					email: rowEntity.volunteerEmail,
+					phone: rowEntity.volunteerPhone,
+					shirtSize: rowEntity.volunteerShirt,
+					shift_id: rowEntity.shift_id,
+					guests: []
+				};
+				volunteerServe.postVolunteer(newVolunteer);
+			} else {
 				var updatedVolunteer = {
 					firstName: rowEntity.volunteerName.split(' ')[0],
 					lastName: rowEntity.volunteerName.split(' ')[1],
 					email: rowEntity.volunteerEmail,
 					phone: rowEntity.volunteerPhone,
 					shirtSize: rowEntity.volunteerShirt,
-					guests: rowEntity.volunteerGuests.split(','),
 					shift_id: rowEntity.shift_id
 				};
-				volunteerServe.updateVolunteer(rowEntity.id, updatedVolunteer).then(function(response){
-					rowEntity.volunteerGuests = guestParser(response.guests);
-				});
+
+				volunteerServe.updateVolunteer(rowEntity.id, updatedVolunteer)
 			}
 		});
 		$scope.export = function(){
@@ -96,6 +118,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 
 								for (var index = 0; index < newTableObject.volunteerGuests.length; index++){
 									var newGuest = {};
+									newGuest.guestArrayIndex = index;
 									newGuest.volunteer_id = newTableObject.id;
 									newGuest.taskName = newTableObject.taskName;
 									newGuest.date = newTableObject.date;
