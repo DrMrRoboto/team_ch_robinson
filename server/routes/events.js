@@ -22,10 +22,15 @@ router.get('/:id', function(req, res, next) {
 
 /*POST new Event*/
 router.post('/', function(req, res, next) {
+	console.log('eventRouter:', req.body);
 	var newEvent = req.body;
+
 
 	if(newEvent.title != undefined) {
 		Event.create(newEvent, function (err, data) {
+			if(err){
+				console.log('event post:', err);
+			}
 			res.send(data);
 		});
 	}

@@ -1,8 +1,8 @@
 /**
  * Created by chottinger on 1/21/16.
  */
-app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 'shiftServe', '$location',
-    function($scope, $routeParams, eventServe, taskServe, shiftServe, $location){
+app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 'shiftServe', '$location', 'copyServe',
+    function($scope, $routeParams, eventServe, taskServe, shiftServe, $location, copyServe){
 
     /**
      * Array to hold list of Tasks for a specific Event ID
@@ -14,7 +14,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
       eventServe.getEvent($routeParams.id).then(function(response){
         $scope.event = response;
         taskServe.getTasks($routeParams.id).then(function(response){
-          console.log(response);
           $scope.tasks = response;
           $scope.tasks.forEach(function(element){
             element.slider = {
@@ -39,14 +38,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
       });
     };
 
-    $scope.copiedEvent = {
-      startsAt: "",
-      endsAt: ""
-    }
-
-    $scope.copyEvent = function() {
-      copyServe.copyEvent($routeParams.id, $scope.copiedEvent.startsAt, $scope.copiedEvent.endsAt);
-    };
 
   /**
    * If an event ID is passed to the URL. This pulls down the information for a specific Event
@@ -76,6 +67,18 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
 
     };
 
+    $scope.copiedEvent = {
+      startsAt: "",
+      endsAt: ""
+    };
+
+    $scope.copyEvent = function() {
+      copyServe.copyEvent($routeParams.id, $scope.copiedEvent.startsAt, $scope.copiedEvent.endsAt)
+        .then(function(response) {
+          $location.path('/adminEvent/' + response._id);
+        });
+    };
+
     $scope.newTask = {
         name: '',
         description: '',
@@ -83,13 +86,10 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
     };
 
     $scope.saveNewTask = function(){
-        console.log($scope.newTask);
         taskServe.createTask($scope.newTask).then(function(response){
-            console.log(response);
             $scope.clearNewTask();
             taskServe.getTasks($routeParams.id).then(function(response){
                 $scope.tasks = response;
-                console.log($scope.tasks);
             });
         $scope.loadAdminEvent();
         });
@@ -135,7 +135,6 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         for(var i = 0; i<(end-start)/length; i++) {
             $scope.newShift.startTime = start + (i * length);
             $scope.newShift.endTime = $scope.newShift.startTime + length;
-            console.log($scope.newShift);
             shiftServe.createShift(angular.copy($scope.newShift));
         };
         $scope.loadAdminEvent();
