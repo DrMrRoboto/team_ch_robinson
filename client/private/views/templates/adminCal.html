@@ -46,7 +46,7 @@
     <div class="admin-future-list">
       <h4>Upcoming Events</h4>
       <div class="list-group">
-        <a class="list-group-item" ng-repeat="event in getFutureEvents(eventData) | limitTo: 5 | orderBy: 'startsAt'"
+        <a class="list-group-item" ng-repeat="event in getFutureEvents(eventData) | limitTo: 3 | orderBy: 'startsAt'"
            ng-href="#/adminEvent/{{event._id}}">
           {{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
       </div>
@@ -54,7 +54,7 @@
     <div class="admin-past-list">
       <h4>Past Events</h4>
       <div class="list-group">
-        <a class="list-group-item" ng-repeat="event in getPastEvents(eventData) | limitTo: 5 | orderBy: '-startsAt'"
+        <a class="list-group-item" ng-repeat="event in getPastEvents(eventData) | limitTo: 3 | orderBy: '-startsAt'"
             ng-href="#/adminEvent/{{event._id}}">
           {{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
       </div>
