@@ -12,7 +12,7 @@ h2 {
     border-bottom: 2px solid #e8dfd1;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     color: rgba(51, 51, 51, 0.93);
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.85);
     width: 40%;
     margin: auto;
     padding: 7px 0 7px 0;
@@ -138,9 +138,8 @@ fieldset {
 .rz-bubble {
     display: none;
 }
-
 .table-back{
-    background-color: #b4d5f0;
+    background-color: rgba(180, 213, 240, 0.9);
     border-radius: 10px;
 }
 .volunteer-guests {
@@ -151,7 +150,7 @@ fieldset {
 }
 
 .user-event-head {
-    background-color: rgba(255, 255, 255, 0.49);
+    background-color: rgba(255, 255, 255, 0.9);
     font-weight: bold;
     font-size: 16px;
     padding: 5px;
@@ -160,7 +159,7 @@ fieldset {
 }
 
 .task-dumpling {
-    background-color: rgba(255, 255, 255, 0.49);
+    background-color: rgba(255, 255, 255, 0.85);
     padding: 5px;
     margin: 5px 0 5px 0;
     border-radius: 10px;
@@ -176,5 +175,5 @@ fieldset {
 .form-horizontal {
     padding: 10px;
     border-radius: 10px;
-    background-color: rgba(181, 212, 240, 0.8);
+    background-color: rgba(181, 212, 240, 0.9);
 }
