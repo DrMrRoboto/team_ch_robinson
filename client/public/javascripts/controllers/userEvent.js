@@ -31,12 +31,7 @@ app.controller('userEvent', ['$scope', '$routeParams', 'eventServe', 'taskServe'
 						$scope.shiftResponse.forEach(function(shift){
 							volunteerServe.getVolunteers(shift._id).then(function(response) {
 								shift.volunteers = response;
-								shift.volunteers.forEach(function(volunteer) {
-									shift.slotsUsed = 0;
-									shift.slotsUsed += 1;
-									shift.slotsUsed += volunteer.guests.length;
-								});
-								shiftServe.updateShift(shift._id, shift);
+								console.log(shift);
 								$scope.shifts.push(shift);
 							});
 						});
@@ -61,10 +56,11 @@ app.controller('userEvent', ['$scope', '$routeParams', 'eventServe', 'taskServe'
 			};
 		};
 
-		$scope.saveVolunteer = function(shiftId) {
+		$scope.saveVolunteer = function(shiftId, slotsUsed) {
 			$scope.shifts = [];
 			$scope.newVolunteer.shift_id = shiftId;
 			$scope.newVolunteer.guests = $scope.guests;
+			shiftServe.updateShift(shiftId, {slotsUsed: slotsUsed});
 			volunteerServe.postVolunteer($scope.newVolunteer)
 					.then(function(){
 				$scope.loadUserEvent();
