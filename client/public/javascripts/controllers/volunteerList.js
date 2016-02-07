@@ -13,30 +13,18 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 		$scope.gridApi = gridApi;
 		$scope.gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue){
 			if(newValue == oldValue){return}
-
+			console.log(rowEntity);
 			if(rowEntity.volunteer_id){
 				volunteerServe.getVolunteer(rowEntity.volunteer_id).then(function(response){
+					console.log(response);
 					var updatedVolunteer = response;
 					updatedVolunteer.guests[rowEntity.guestArrayIndex]= {
 						name: rowEntity.volunteerName,
 						shirtSize: rowEntity.volunteerShirt
-					}
-					volunteerServe.postVolunteer(updatedVolunteer._id);
+					};
+					volunteerServe.updateVolunteer(updatedVolunteer._id, updatedVolunteer);
 				});
-			} else if (rowEntity.volunteerName !== '' &&
-			rowEntity.volunteerEmail !== '' &&
-			oldValue == '') {
-				var newVolunteer = {
-					firstName: rowEntity.volunteerName.split(' ')[0],
-					lastName: rowEntity.volunteerName.split(' ')[1],
-					email: rowEntity.volunteerEmail,
-					phone: rowEntity.volunteerPhone,
-					shirtSize: rowEntity.volunteerShirt,
-					shift_id: rowEntity.shift_id,
-					guests: []
-				};
-				volunteerServe.postVolunteer(newVolunteer);
-			} else {
+			} else if (rowEntity.id){
 				var updatedVolunteer = {
 					firstName: rowEntity.volunteerName.split(' ')[0],
 					lastName: rowEntity.volunteerName.split(' ')[1],
@@ -47,6 +35,25 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 				};
 
 				volunteerServe.updateVolunteer(rowEntity.id, updatedVolunteer)
+			} else if (rowEntity.volunteerName !== '' &&
+								 rowEntity.volunteerEmail !== '' &&
+								 oldValue == ''){
+				var newVolunteer = {
+					firstName: rowEntity.volunteerName.split(' ')[0],
+					lastName: rowEntity.volunteerName.split(' ')[1],
+					email: rowEntity.volunteerEmail,
+					phone: rowEntity.volunteerPhone,
+					shirtSize: rowEntity.volunteerShirt,
+					shift_id: rowEntity.shift_id,
+					guests: []
+				};
+				shiftServe.getShift(rowEntity.shift_id).then(function(response){
+					response.slotsUsed++;
+					shiftServe.updateShift(response._id, response);
+				});
+				volunteerServe.postVolunteer(newVolunteer).then(function(response){
+					rowEntity.volunteer_id = response._id;
+				});
 			}
 		});
 		$scope.export = function(){
@@ -94,70 +101,43 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 			shiftServe.getShifts(task._id).then(function (shiftResponse) {
 				shiftResponse.forEach(function (shift) {
 					volunteerServe.getVolunteers(shift._id).then(function (volunteerResponse) {
-						var i = 0;
-						while(i < shift.slotsAvailable) {
-							if (i < shift.slotsUsed) {
+						var volunteerAndGuests = guestParser(volunteerResponse,
+								shift.slotsAvailable - shift.slotsUsed);
+
+						for(var i = 0;i < shift.slotsAvailable; i++){
+							if(volunteerAndGuests[i]._id){
 								var newTableObject = {
-									id: volunteerResponse[i]._id,
-									shift_id: shift._id,
+									id: volunteerAndGuests[i]._id,
 									taskName: shift.task_name,
 									date: shift.date,
+									shift_id: shift._id,
 									shiftTime: timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime),
-									volunteerName: volunteerResponse[i].firstName + ' ' + volunteerResponse[i].lastName,
-									volunteerEmail: volunteerResponse[i].email,
-									volunteerPhone: volunteerResponse[i].phone,
-									volunteerShirt: volunteerResponse[i].shirtSize,
-									volunteerGuests: volunteerResponse[i].guests
+									volunteerName: volunteerAndGuests[i].firstName + ' ' + volunteerAndGuests[i].lastName,
+									volunteerEmail: volunteerAndGuests[i].email,
+									volunteerPhone: volunteerAndGuests[i].phone,
+									volunteerShirt: volunteerAndGuests[i].shirtSize
 								};
-
-								$scope.gridOptions.data.push(newTableObject);
-
-								i++;
-
-
-
-								for (var index = 0; index < newTableObject.volunteerGuests.length; index++){
-									var newGuest = {};
-									newGuest.guestArrayIndex = index;
-									newGuest.volunteer_id = newTableObject.id;
-									newGuest.taskName = newTableObject.taskName;
-									newGuest.date = newTableObject.date;
-									newGuest.shiftTime = newTableObject.shiftTime;
-									newGuest.volunteerName = newTableObject.volunteerGuests[index].name;
-									newGuest.volunteerEmail = 'Guest of ' + newTableObject.volunteerName;
-									newGuest.volunteerPhone = 'Guest of ' + newTableObject.volunteerName;
-									newGuest.volunteerShirt = newTableObject.volunteerGuests[index].shirtSize;
-									$scope.gridOptions.data.push(newGuest);
-									i++;
-								}
+							} else if(volunteerAndGuests[i].name){
+								var newTableObject = volunteerAndGuests[i];
+								newTableObject.date = shift.date;
+								newTableObject.shiftTime = timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime);
+								newTableObject.taskName = shift.task_name;
 
 							} else {
-								var newTableObject = {
-									id: shift._id,
-									shift_id: shift.shift_id,
-									taskName: shift.task_name,
-									date: shift.date,
-									shiftTime: timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime),
-									volunteerName: '',
-									volunteerEmail: '',
-									volunteerPhone: '',
-									volunteerShirt: '',
-									volunteerGuests: ''
-								};
-								$scope.gridOptions.data.push(newTableObject);
-								i++;
+								var newTableObject = volunteerAndGuests[i];
+								newTableObject.shift_id = shift._id;
+								newTableObject.taskName = shift.task_name;
+								newTableObject.date = shift.date;
+								newTableObject.shiftTime = timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime);
 							}
 
-
-
-							shift.volunteers = response;
+							$scope.gridOptions.data.push(newTableObject);
 						}
 					});
 				});
 			});
 		});
 	});
-
 }]);
 
 
@@ -188,19 +168,36 @@ function timeConverter (time){
 }
 
 /**
- * Converts array of guest data into single string
+ * Converts an array of volunteer data into an array of row data for ui-grid, including empty rows for shifts
  * @param array
- * @returns {string}
+ * @returns {array}
  */
-function guestParser(array){
-	var guestString = '';
-	for(var i = 0; i < array.length; i++){
-		if(i !== array.length - 1) {
-			guestString += array[i] + ',\n';
-		} else {
-			guestString += array[i];
+function guestParser(array, emptyRows){
+	var volunteerAndGuests = [];
+	for(var i = 0; i < array.length;i++){
+		volunteerAndGuests.push(array[i]);
+		if(array[i].guests.length !== 0){
+			array[i].guests.forEach(function(guest, index){
+				guest._id = false;
+				guest.guestArrayIndex = index;
+				guest.volunteer_id = array[i]._id;
+				guest.volunteerName = guest.name;
+				guest.volunteerEmail = 'Guest of ' + array[i].firstName + ' ' + array[i].lastName;
+				guest.volunteerPhone = 'Guest of ' + array[i].firstName + ' ' + array[i].lastName;
+				guest.volunteerShirt = guest.shirtSize;
+				volunteerAndGuests.push(guest);
+			});
 		}
 	}
-	return guestString;
+	for(i = 0; i < emptyRows; i++){
+		volunteerAndGuests.push({
+			_id: false,
+			volunteerName: '',
+			volunteerEmail: '',
+			volunteerPhone: '',
+			volunteerShirt: ''
+		});
+	}
+	return volunteerAndGuests;
 }
 
