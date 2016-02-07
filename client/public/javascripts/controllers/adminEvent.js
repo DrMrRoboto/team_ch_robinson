@@ -79,6 +79,13 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         });
     };
 
+    $scope.removeEvent = function() {
+      eventServe.deleteEvent($scope.event._id).then(function(response){
+        $location.path('/adminCal');
+        console.log(response);
+      })
+    };
+
     $scope.newTask = {
         name: '',
         description: '',
