@@ -14,7 +14,7 @@ router.get('/:id', function(req, res, next) {
 router.get('/report/:id', function(req, res, next){
 	var volunteerID = req.params.id;
 	Volunteer.find({_id: volunteerID}, function(err, data){
-		res.send(data);
+		res.send(data[0]);
 	});
 });
 

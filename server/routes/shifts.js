@@ -3,6 +3,13 @@ var router = express.Router();
 var Shift = require('../models/shifts');
 
 /*------------------------Shifts------------------------*/
+/*GET single shift by id */
+router.get('/report/:id', function(req,res,next){
+	var shiftID = req.params.id;
+	Shift.find({_id: shiftID}, function(err, data){
+		res.send(data[0]);
+	});
+});
 /* GET Shift listing for a specific Task */
 router.get('/:id', function(req, res, next) {
 	var taskID = req.params.id;
