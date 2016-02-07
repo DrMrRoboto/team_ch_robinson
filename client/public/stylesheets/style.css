@@ -177,3 +177,6 @@ fieldset {
     border-radius: 10px;
     background-color: rgba(181, 212, 240, 0.9);
 }
+.overflow {
+    overflow: hidden;
+}
