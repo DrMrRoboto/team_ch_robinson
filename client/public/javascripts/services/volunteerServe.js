@@ -12,7 +12,7 @@ app.factory('volunteerServe',['$http',function($http){
         getVolunteer: function(volunteerId){
             return $http({
                 method: 'get',
-                url: '/volunteers/' + volunteerId
+                url: '/volunteers/report/' + volunteerId
             }).then(function(response){
                 return response.data
             }, function(errorResponse){
