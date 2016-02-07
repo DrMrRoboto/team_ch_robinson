@@ -8,6 +8,21 @@ app.factory('shiftServe',['$http',function($http){
 
   return {
     /**
+     * Gets shift from the database by shiftId
+     * @param shiftId
+     * @returns $http promise object
+     */
+    getShift: function(shiftId){
+      return $http({
+        method: 'get',
+        url: '/shifts/report/' + shiftId
+      }).then(function(response){
+        return response.data
+      }, function(errorResponse){
+        return errorResponse.data
+      });
+    },
+    /**
      * Gets all shifts from the database associated with entered taskId
      * @param taskId
      * @returns $http promise object
