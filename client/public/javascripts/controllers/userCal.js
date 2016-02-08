@@ -8,6 +8,7 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$
   //sets eventData, but only after $http call in getEvents() is complete
   eventServe.getEvents().then(function(response){
     $scope.eventData = response;
+    $scope.futureEvents = getFutureEvents(response)
   });
 
   var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -21,17 +22,22 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$
     //sets calendarView to current month
   $scope.viewDate = new Date(moment());
 
+
   $scope.viewTitle = monthNames[$scope.viewDate.getMonth()];
 
     //$scope.now is called within admin/user calendarView pages so that upcoming
     //and previous events are displayed within the context of 'today'
-  $scope.now = moment();
+  $scope.now = new Date(moment());
 
   $scope.eventClicked = function(event) {
     $location.path('/userEvent/' + event._id)
   };
 
-  $scope.getFutureEvents = function(events){
+  $scope.thisMonth = function(){
+    $scope.viewDate = $scope.now;
+  };
+
+  var getFutureEvents = function(events){
     var futureEvents = [];
     for (event of events){
       if (event.startsAt >= moment()){
