@@ -2,7 +2,6 @@
  *
  * Created by chottinger on 1/21/16.
  */
-"use strict";
 app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$location',
   function($scope, moment, calendarConfig, eventServe, $location){
 
