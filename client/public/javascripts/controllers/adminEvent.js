@@ -2,7 +2,7 @@
  * Created by chottinger on 1/21/16.
  */
 app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 'shiftServe', '$location', 'copyServe',
-    function($scope, $routeParams, eventServe, taskServe, shiftServe, $location, copyServe){
+  '$timeout', function($scope, $routeParams, eventServe, taskServe, shiftServe, $location, copyServe, $timeout){
 
     /**
      * Array to hold list of Tasks for a specific Event ID
@@ -79,6 +79,13 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         });
     };
 
+    $scope.removeEvent = function() {
+      eventServe.deleteEvent($scope.event._id).then(function(response){
+        $location.path('/adminCal');
+        console.log(response);
+      })
+    };
+
     $scope.newTask = {
         name: '',
         description: '',
@@ -151,6 +158,12 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
     $scope.deleteShift = function(shiftId) {
       shiftServe.deleteShift(shiftId);
       $scope.loadAdminEvent();
-    }
+    };
+
+    $scope.refreshSlider = function () {
+      $timeout(function () {
+        $scope.$broadcast('rzSliderForceRender');
+      });
+    };
 }]);
 

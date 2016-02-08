@@ -177,3 +177,14 @@ fieldset {
     border-radius: 10px;
     background-color: rgba(181, 212, 240, 0.9);
 }
+.overflow {
+    overflow: hidden;
+}
+
+.title-head {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 5px;
+    margin: 5px 0 5px 0;
+    border-radius: 10px;
+    text-align: center;
+}
