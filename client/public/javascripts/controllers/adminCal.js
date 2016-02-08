@@ -1,11 +1,14 @@
 /**
  * Created by chottinger on 1/21/16.
  */
+"use strict";
 app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe', '$location',
     function($scope, moment, calendarConfig, eventServe, $location){
 
     eventServe.getEvents().then(function(response){
         $scope.eventData = response
+        $scope.pastEvents = getPastEvents(response);
+        $scope.futureEvents = getFutureEvents(response)
     });
 
     var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -23,7 +26,7 @@ app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe', '$
     $scope.rightNow = function(){
         return moment();
     }
-    $scope.getPastEvents = function(events) {
+    var getPastEvents = function(events) {
         var pastEvents = [];
         for (event of events){
             if (event.startsAt < moment()){
@@ -33,7 +36,7 @@ app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe', '$
         return pastEvents;
     };
 
-    $scope.getFutureEvents = function(events){
+    var getFutureEvents = function(events){
         var futureEvents = [];
         for (event of events){
             if (event.startsAt >= moment()){
