@@ -4,6 +4,7 @@
 app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe','shiftServe','volunteerServe',
 	function($scope, $routeParams, eventServe, taskServe, shiftServe, volunteerServe){
 
+
 	//ui-grid configurations
 	$scope.gridOptions = {};
 	//row height for entire grid(dynamic heights not available
@@ -13,7 +14,6 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 		$scope.gridApi = gridApi;
 		$scope.gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue){
 			if(newValue == oldValue){return}
-			console.log(rowEntity);
 			if(rowEntity.volunteer_id){
 				volunteerServe.getVolunteer(rowEntity.volunteer_id).then(function(response){
 					console.log(response);
@@ -62,27 +62,36 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 	};
 
 	$scope.gridOptions.enableCellEditOnFocus = true;
-	$scope.gridOptions.data = [];
 
 	var templateForTextWrap = '<div class="ui-grid-cell-contents wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
 
+	var templateForDeleteButton = '<div class="ui-grid-cell-contents">' +
+																	'<button class="btn btn-default" type="button" ng-click="grid.appScope.passRowInfo(row.entity)"  ' +
+																		'data-toggle="modal" data-target="#deleteUserModal"' +
+																		'ng-if="row.entity.volunteerName">' +
+																		'Delete' +
+																	'</button>' +
+																'</div>';
+
 	//column definitions, widths must be defined manually
 	$scope.gridOptions.columnDefs = [
-		{name: 'date', displayName: 'Date', enableCellEdit: false,
-			cellFilter: 'date: "EEE M/d"', width: '6%',cellTemplate: templateForTextWrap},
+		{name: 'date', displayName: 'Date', enableCellEdit: false, cellFilter: 'date: "EEE M/d"',
+			width: '6%',cellTemplate: templateForTextWrap, enableColumnMenu: false, enableSorting: false},
 		{name: 'taskName', displayName: 'Task', enableCellEdit: false,
-			width: '20%', cellTemplate: templateForTextWrap},
+			width: '15%', cellTemplate: templateForTextWrap, enableColumnMenu: false, enableSorting: false},
 		{name: 'shiftTime', displayName: 'Shift', enableCellEdit: false,
-			width: '7%', cellTemplate: templateForTextWrap},
+			width: '7%', cellTemplate: templateForTextWrap, enableColumnMenu: false, enableSorting: false},
 			//enableCellEditOnFocus: false changes cell edit to be on double click
 		{name: 'volunteerName', displayName: 'Volunteer', enableCellEditOnFocus: false,
 			width: '15%', cellTemplate: templateForTextWrap},
 		{name: 'volunteerEmail', displayName: 'E-mail', enableCellEditOnFocus: false,
-			width: '25%',cellTemplate: templateForTextWrap},
+			width: '23%',cellTemplate: templateForTextWrap},
 		{name: 'volunteerPhone', displayName: 'Phone', enableCellEditOnFocus: false,
 			width:'17%',cellTemplate: templateForTextWrap},
 		{name: 'volunteerShirt', displayName: 'Shirt Size', enableCellEditOnFocus: false,
-			width: '10%',cellTemplate: templateForTextWrap}
+			width: '10%',cellTemplate: templateForTextWrap},
+		{name: 'deleteButton', displayName: 'Delete', enableCellEdit: false,
+			width: '7%', cellTemplate: templateForDeleteButton, enableColumnMenu: false, enableSorting: false}
 	];
 
 
@@ -96,48 +105,92 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 
 	//fetches tasks, then shifts, then volunteers, placing the data
 	// in the right format for the grid (empty rows for unoccupied shifts as well)
-	taskServe.getTasks($routeParams.id).then(function(taskResponse) {
-		taskResponse.forEach(function (task) {
-			shiftServe.getShifts(task._id).then(function (shiftResponse) {
-				shiftResponse.forEach(function (shift) {
-					volunteerServe.getVolunteers(shift._id).then(function (volunteerResponse) {
-						var volunteerAndGuests = guestParser(volunteerResponse,
-								shift.slotsAvailable - shift.slotsUsed);
+	$scope.loadGridData = function() {
+		$scope.gridOptions.data = [];
+		taskServe.getTasks($routeParams.id).then(function (taskResponse) {
+			taskResponse.forEach(function (task) {
+				shiftServe.getShifts(task._id).then(function (shiftResponse) {
+					shiftResponse.forEach(function (shift) {
+						volunteerServe.getVolunteers(shift._id).then(function (volunteerResponse) {
+							var volunteerAndGuests = guestParser(volunteerResponse,
+									shift.slotsAvailable - shift.slotsUsed);
+							console.log(volunteerAndGuests);
+							for (var i = 0; i < shift.slotsAvailable; i++) {
+								if (volunteerAndGuests[i]._id) {
+									var newTableObject = {
+										id: volunteerAndGuests[i]._id,
+										taskName: shift.task_name,
+										date: shift.date,
+										shift_id: shift._id,
+										shiftTime: timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime),
+										volunteerName: volunteerAndGuests[i].firstName + ' ' + volunteerAndGuests[i].lastName,
+										volunteerEmail: volunteerAndGuests[i].email,
+										volunteerPhone: volunteerAndGuests[i].phone,
+										volunteerShirt: volunteerAndGuests[i].shirtSize,
+										volunteerGuests: volunteerResponse.guests
+									};
+								} else if (volunteerAndGuests[i].name) {
+									var newTableObject = volunteerAndGuests[i];
+									newTableObject.date = shift.date;
+									newTableObject.shiftTime = timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime);
+									newTableObject.taskName = shift.task_name;
+									newTableObject.shift_id = shift._id;
 
-						for(var i = 0;i < shift.slotsAvailable; i++){
-							if(volunteerAndGuests[i]._id){
-								var newTableObject = {
-									id: volunteerAndGuests[i]._id,
-									taskName: shift.task_name,
-									date: shift.date,
-									shift_id: shift._id,
-									shiftTime: timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime),
-									volunteerName: volunteerAndGuests[i].firstName + ' ' + volunteerAndGuests[i].lastName,
-									volunteerEmail: volunteerAndGuests[i].email,
-									volunteerPhone: volunteerAndGuests[i].phone,
-									volunteerShirt: volunteerAndGuests[i].shirtSize
-								};
-							} else if(volunteerAndGuests[i].name){
-								var newTableObject = volunteerAndGuests[i];
-								newTableObject.date = shift.date;
-								newTableObject.shiftTime = timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime);
-								newTableObject.taskName = shift.task_name;
+								} else {
+									var newTableObject = volunteerAndGuests[i];
+									newTableObject.shift_id = shift._id;
+									newTableObject.taskName = shift.task_name;
+									newTableObject.date = shift.date;
+									newTableObject.shiftTime = timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime);
+								}
 
-							} else {
-								var newTableObject = volunteerAndGuests[i];
-								newTableObject.shift_id = shift._id;
-								newTableObject.taskName = shift.task_name;
-								newTableObject.date = shift.date;
-								newTableObject.shiftTime = timeConverter(shift.startTime) + '-' + timeConverter(shift.endTime);
+								$scope.gridOptions.data.push(newTableObject);
 							}
-
-							$scope.gridOptions.data.push(newTableObject);
-						}
+						});
 					});
 				});
 			});
 		});
-	});
+	};
+
+	$scope.loadGridData();
+
+		/**
+		 * Function that gives modal access to grid information while also toggling whether
+		 * a guest or volunteer has been selected for deletion
+		 * @param rowObject
+     */
+	$scope.passRowInfo = function(rowObject){
+		if(rowObject.volunteer_id){
+			$scope.volunteerOrGuest = 'guest';
+		} else {
+			$scope.volunteerOrGuest = 'volunteer';
+		}
+		$scope.userToDelete = rowObject;
+	};
+
+	$scope.removeUser = function(){
+		console.log($scope.userToDelete);
+		if($scope.userToDelete.volunteer_id){
+			volunteerServe.getVolunteer($scope.userToDelete.volunteer_id).then(function(response) {
+				var updatedVolunteer = response;
+				updatedVolunteer.guests.splice($scope.userToDelete.guestArrayIndex, 1);
+				shiftServe.getShift($scope.userToDelete.shift_id).then(function(response){
+					response.slotsUsed--;
+					shiftServe.updateShift(response._id, response);
+				});
+				volunteerServe.updateVolunteer(updatedVolunteer._id, updatedVolunteer);
+			});
+		}else {
+			volunteerServe.deleteVolunteer($scope.userToDelete.id);
+			shiftServe.getShift($scope.userToDelete.shift_id).then(function(response){
+				response.slotsUsed -= (1 + $scope.userToDelete.guests.length);
+				shiftServe.updateShift(response._id, response);
+			});
+		}
+
+		$scope.loadGridData();
+	};
 }]);
 
 
@@ -200,4 +253,5 @@ function guestParser(array, emptyRows){
 	}
 	return volunteerAndGuests;
 }
+
 
