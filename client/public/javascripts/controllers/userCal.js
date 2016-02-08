@@ -2,12 +2,14 @@
  *
  * Created by chottinger on 1/21/16.
  */
+"use strict";
 app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$location',
   function($scope, moment, calendarConfig, eventServe, $location){
 
   //sets eventData, but only after $http call in getEvents() is complete
   eventServe.getEvents().then(function(response){
     $scope.eventData = response;
+    $scope.futureEvents = getFutureEvents(response)
   });
 
   var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -36,7 +38,7 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$
     $scope.viewDate = $scope.now;
   };
 
-  $scope.getFutureEvents = function(events){
+  var getFutureEvents = function(events){
     var futureEvents = [];
     for (event of events){
       if (event.startsAt >= moment()){
