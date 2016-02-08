@@ -230,14 +230,14 @@
             </div>
             <button class="btn btn-default" type="button" data-toggle="modal" data-target="#shift{{task._id}}">
               New Shift</button>
-            <div id="shift{{task._id}}" class="modal fade" role="dialog">
+
+            <div id="shift{{task._id}}" class="modal fade" role="dialog" ng-mouseover="refreshSlider()">
               <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" >
                   <div class="modal-header">
                     <button type="button" value="2, 5" min="0" max="10" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Create Shifts</h4>
                   </div>
-
                   <div class="modal-body">
                     <div>
                       <form>
@@ -264,7 +264,8 @@
                           <rzslider id="shiftTime"
                                     rz-slider-model="task.slider.min"
                                     rz-slider-high="task.slider.max"
-                                    rz-slider-options="task.slider.options"></rzslider>
+                                    rz-slider-options="task.slider.options"
+                          ></rzslider>
                         </div>
                         <label for="shiftLength">Shift Length</label>
                         <select id="shiftLength" ng-model="shiftLength">
