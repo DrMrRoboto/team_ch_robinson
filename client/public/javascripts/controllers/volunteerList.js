@@ -16,7 +16,6 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 			if(newValue == oldValue){return}
 			if(rowEntity.volunteer_id){
 				volunteerServe.getVolunteer(rowEntity.volunteer_id).then(function(response){
-					console.log(response);
 					var updatedVolunteer = response;
 					updatedVolunteer.guests[rowEntity.guestArrayIndex]= {
 						name: rowEntity.volunteerName,
@@ -52,7 +51,8 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 					shiftServe.updateShift(response._id, response);
 				});
 				volunteerServe.postVolunteer(newVolunteer).then(function(response){
-					rowEntity.volunteer_id = response._id;
+					rowEntity.id = response._id;
+					rowEntity.volunteerGuests = [];
 				});
 			}
 		});
@@ -114,7 +114,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 						volunteerServe.getVolunteers(shift._id).then(function (volunteerResponse) {
 							var volunteerAndGuests = guestParser(volunteerResponse,
 									shift.slotsAvailable - shift.slotsUsed);
-							console.log(volunteerAndGuests);
+							console.log(volunteerAndGuests, shift.slotsAvailable, shift.slotsUsed);
 							for (var i = 0; i < shift.slotsAvailable; i++) {
 								if (volunteerAndGuests[i]._id) {
 									var newTableObject = {
@@ -127,7 +127,7 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 										volunteerEmail: volunteerAndGuests[i].email,
 										volunteerPhone: volunteerAndGuests[i].phone,
 										volunteerShirt: volunteerAndGuests[i].shirtSize,
-										volunteerGuests: volunteerResponse.guests
+										volunteerGuests: volunteerAndGuests[i].guests
 									};
 								} else if (volunteerAndGuests[i].name) {
 									var newTableObject = volunteerAndGuests[i];
@@ -170,26 +170,31 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 	};
 
 	$scope.removeUser = function(){
-		console.log($scope.userToDelete);
 		if($scope.userToDelete.volunteer_id){
 			volunteerServe.getVolunteer($scope.userToDelete.volunteer_id).then(function(response) {
+
 				var updatedVolunteer = response;
 				updatedVolunteer.guests.splice($scope.userToDelete.guestArrayIndex, 1);
-				shiftServe.getShift($scope.userToDelete.shift_id).then(function(response){
-					response.slotsUsed--;
-					shiftServe.updateShift(response._id, response);
+				volunteerServe.updateVolunteer(updatedVolunteer._id, updatedVolunteer).then(function(){
+					shiftServe.getShift($scope.userToDelete.shift_id).then(function(response){
+						response.slotsUsed--;
+						shiftServe.updateShift(response._id, response).then(function(){
+							$scope.loadGridData();
+						});
+					});
 				});
-				volunteerServe.updateVolunteer(updatedVolunteer._id, updatedVolunteer);
+
 			});
 		}else {
-			volunteerServe.deleteVolunteer($scope.userToDelete.id);
-			shiftServe.getShift($scope.userToDelete.shift_id).then(function(response){
-				response.slotsUsed -= (1 + $scope.userToDelete.guests.length);
-				shiftServe.updateShift(response._id, response);
+			volunteerServe.deleteVolunteer($scope.userToDelete.id).then(function(){
+				shiftServe.getShift($scope.userToDelete.shift_id).then(function(response){
+					response.slotsUsed -= (1 + $scope.userToDelete.volunteerGuests.length);
+					shiftServe.updateShift(response._id, response).then(function(){
+						$scope.loadGridData();
+					});
+				});
 			});
 		}
-
-		$scope.loadGridData();
 	};
 }]);
 
