@@ -1,5 +1,3 @@
-
-"use strict";
 var app = angular.module('chrCalendarApp', [
   'ngRoute',
   'ngTouch',
