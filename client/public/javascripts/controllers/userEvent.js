@@ -4,6 +4,9 @@
 app.controller('userEvent', ['$scope', '$routeParams', 'eventServe', 'taskServe', 'shiftServe', 'volunteerServe',
 	function ($scope, $routeParams, eventServe, taskServe, shiftServe, volunteerServe) {
 
+		$scope.sortType = 'task_name';
+		$scope.sortReverse = false;
+
 		$scope.shifts = [];
 		$scope.newVolunteer = {
 			firstName: "",
