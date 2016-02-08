@@ -46,7 +46,7 @@
 		<div class="user-event-list">
 			<h4>Upcoming Events</h4>
 			<div class="list-group">
-				<a class="list-group-item" ng-repeat="event in getFutureEvents(eventData) | orderBy: 'startsAt'| limitTo: 6 "
+				<a class="list-group-item" ng-repeat="event in futureEvents | orderBy: 'startsAt'| limitTo: 6 "
 				ng-if="event.startsAt >= now" ng-href="#/userEvent/{{event._id}}">
 				{{event.title}} - {{event.startsAt | date:format:shortDate}}</a>
 			</div>
