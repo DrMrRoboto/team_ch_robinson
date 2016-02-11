@@ -24,14 +24,14 @@ app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe', '$
 
     $scope.rightNow = function(){
         return moment();
-    }
+    };
     var getPastEvents = function(events) {
         var pastEvents = [];
         for (event of events){
             if (event.startsAt < moment()){
                 pastEvents.push(event);
-            };
-        };
+            }
+        }
         return pastEvents;
     };
 
@@ -40,8 +40,8 @@ app.controller('adminCal', ['$scope','moment', 'calendarConfig','eventServe', '$
         for (event of events){
             if (event.startsAt >= moment()){
                 futureEvents.push(event);
-            };
-        };
+            }
+        }
         return futureEvents;
     };
 

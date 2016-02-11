@@ -17,21 +17,24 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$
 
   calendarConfig.templates.calendarMonthCell = 'views/templates/userMonthDayViewTemplate.html';
 
+  //configures calendar view to be monthly
   $scope.view = 'month';
 
     //sets calendarView to current month
   $scope.viewDate = new Date(moment());
 
-
+  //gets month and converts it to a string using monthNames array
   $scope.viewTitle = monthNames[$scope.viewDate.getMonth()];
 
     //$scope.now is called within admin/user calendarView pages so that upcoming
     //and previous events are displayed within the context of 'today'
   $scope.now = new Date(moment());
 
+  //links to specific event page when event is clicked
   $scope.eventClicked = function(event) {
     $location.path('/userEvent/' + event._id)
   };
+
 
   $scope.thisMonth = function(){
     $scope.viewDate = $scope.now;
@@ -42,8 +45,8 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$
     for (event of events){
       if (event.startsAt >= moment()){
         futureEvents.push(event);
-      };
-    };
+      }
+    }
     return futureEvents;
   };
 

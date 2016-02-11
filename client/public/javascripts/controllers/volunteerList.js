@@ -7,11 +7,12 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 
 	//ui-grid configurations
 	$scope.gridOptions = {};
-	//row height for entire grid(dynamic heights not available
+	//row height for entire grid(dynamic heights not available)
 	$scope.gridOptions.rowHeight = 100;
-	//event that sends updated volunteer to database after change
+
 	$scope.gridOptions.onRegisterApi= function(gridApi){
 		$scope.gridApi = gridApi;
+		//event that sends updated volunteer to database after change
 		$scope.gridApi.edit.on.afterCellEdit($scope, function(rowEntity, colDef, newValue, oldValue){
 			if(newValue == oldValue){return}
 			if(rowEntity.volunteer_id){
@@ -63,6 +64,8 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 
 	$scope.gridOptions.enableCellEditOnFocus = true;
 
+
+	//custome templates for ui-grid cells
 	var templateForTextWrap = '<div class="ui-grid-cell-contents wrap" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>'
 
 	var templateForDeleteButton = '<div class="ui-grid-cell-contents">' +
@@ -95,7 +98,6 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 	];
 
 
-
 	//data fetching and storage
 	$scope.data = {};
 
@@ -114,7 +116,6 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 						volunteerServe.getVolunteers(shift._id).then(function (volunteerResponse) {
 							var volunteerAndGuests = guestParser(volunteerResponse,
 									shift.slotsAvailable - shift.slotsUsed);
-							console.log(volunteerAndGuests, shift.slotsAvailable, shift.slotsUsed);
 							for (var i = 0; i < shift.slotsAvailable; i++) {
 								if (volunteerAndGuests[i]._id) {
 									var newTableObject = {
@@ -169,6 +170,10 @@ app.controller('volunteerList', ['$scope','$routeParams','eventServe','taskServe
 		$scope.userToDelete = rowObject;
 	};
 
+		/**
+		 * Function (fired on click inside modal) that deletes a guest or volunteer, manipulating the shift
+		 * slotsUsed appropriately as well.
+		 */
 	$scope.removeUser = function(){
 		if($scope.userToDelete.volunteer_id){
 			volunteerServe.getVolunteer($scope.userToDelete.volunteer_id).then(function(response) {
