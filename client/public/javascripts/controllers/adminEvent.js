@@ -119,7 +119,7 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         .then(function() {
           $scope.loadAdminEvent();
         })
-    }
+    };
 
 
     $scope.newShift = {
@@ -151,7 +151,7 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
             $scope.newShift.startTime = start + (i * length);
             $scope.newShift.endTime = $scope.newShift.startTime + length;
             shiftServe.createShift(angular.copy($scope.newShift));
-        };
+        }
         $scope.loadAdminEvent();
     };
 
