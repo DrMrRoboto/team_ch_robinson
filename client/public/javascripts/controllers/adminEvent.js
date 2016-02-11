@@ -10,6 +10,9 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
    */
     $scope.tasks = [];
 
+		/**
+     * Function to make call to database for event, task, and shift information for a specific Event ID
+     */
     $scope.loadAdminEvent = function(){
       eventServe.getEvent($routeParams.id).then(function(response){
         $scope.event = response;
@@ -54,6 +57,9 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         };
     }
 
+		/**
+     * Function to save new event or update existing event in the database
+     */
     $scope.saveEvent = function (){
         if($scope.event._id){
             eventServe.updateEvent($scope.event._id, $scope.event)
@@ -67,11 +73,18 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
 
     };
 
+		/**
+     * Object for date data to copy event
+     * @type {{startsAt: string, endsAt: string}}
+     */
     $scope.copiedEvent = {
       startsAt: "",
       endsAt: ""
     };
 
+		/**
+     * Function to copy event to new dates
+     */
     $scope.copyEvent = function() {
       copyServe.copyEvent($routeParams.id, $scope.copiedEvent.startsAt, $scope.copiedEvent.endsAt)
         .then(function(response) {
@@ -79,6 +92,9 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         });
     };
 
+		/**
+     * Functions deletes an event from the database
+     */
     $scope.removeEvent = function() {
       eventServe.deleteEvent($scope.event._id).then(function(response){
         $location.path('/adminCal');
@@ -86,12 +102,19 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
       })
     };
 
+		/**
+     * object contains data fields to create a new task
+     * @type {{name: string, description: string, event_id: *}}
+     */
     $scope.newTask = {
         name: '',
         description: '',
         event_id: $routeParams.id
     };
 
+		/**
+     * Function saves a new task to the database
+     */
     $scope.saveNewTask = function(){
         taskServe.createTask($scope.newTask).then(function(response){
             $scope.clearNewTask();
@@ -102,11 +125,19 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         });
     };
 
+		/**
+     * Function to reset the newTask object
+     */
     $scope.clearNewTask = function(){
         $scope.newTask.name = '';
         $scope.newTask.description = '';
     };
 
+		/**
+     * Function to update existing task in the database
+     * @param taskId
+     * @param task
+     */
     $scope.editTask = function(taskId, task) {
       taskServe.updateTask(taskId, task)
         .then(function() {
@@ -114,6 +145,10 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         })
     };
 
+		/**
+     * Function to delete a specific task from the database
+     * @param taskId
+     */
     $scope.deleteTask = function(taskId) {
       taskServe.deleteTask(taskId)
         .then(function() {
@@ -121,7 +156,10 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         })
     };
 
-
+    /**
+     * Object holds data for a new shift being created
+     * @type {{date: string, startTime: string, endTime: string, slotsAvailable: string, task_id: string, task_name: string}}
+		 */
     $scope.newShift = {
         date: "",
         startTime: "",
@@ -131,10 +169,23 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         task_name: ""
     };
 
-        $scope.shiftLength = "";
-        $scope.shiftSlots = "";
-        $scope.shiftDate = "";
+		/**
+     * variables controlling shift creation
+     * @type {string}
+     */
+    $scope.shiftLength = "";
+    $scope.shiftSlots = "";
+    $scope.shiftDate = "";
 
+		/**
+     * Function saves a series of new shifts to the database
+     * @param taskId
+     * @param taskName
+     * @param index
+     * @param shiftLength
+     * @param shiftSlots
+     * @param shiftDate
+		 */
     $scope.saveNewShift = function(taskId, taskName, index, shiftLength, shiftSlots, shiftDate) {
 
         var start = $scope.tasks[index].slider.min;
@@ -155,11 +206,18 @@ app.controller('adminEvent',['$scope','$routeParams','eventServe', 'taskServe', 
         $scope.loadAdminEvent();
     };
 
+		/**
+     * Function deletes shift from the database
+     * @param shiftId
+     */
     $scope.deleteShift = function(shiftId) {
       shiftServe.deleteShift(shiftId);
       $scope.loadAdminEvent();
     };
 
+		/**
+     * Function to re-render the slider inside shift creation modal so it displays properly
+     */
     $scope.refreshSlider = function () {
       $timeout(function () {
         $scope.$broadcast('rzSliderForceRender');

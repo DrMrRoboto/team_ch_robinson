@@ -1,6 +1,11 @@
 app.factory('copyServe',['$http', 'eventServe', 'taskServe',
 	function($http, eventServe, taskServe){
 
+
+		/**
+		 * Function pulls down previous event, changes the dates using date inputs, and saves to database as
+		 * new event
+		 */
 		return {
 			copyEvent: function(eventId, newStartAt, newEndAt) {
 				return eventServe.getEvent(eventId).then(function(eventResponse){
