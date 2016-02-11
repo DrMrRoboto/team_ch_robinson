@@ -18,9 +18,13 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$
   calendarConfig.templates.calendarMonthCell = 'views/templates/userMonthDayViewTemplate.html';
 
   //configures calendar view to be monthly
+
   $scope.view = 'month';
 
-    //sets calendarView to current month
+    /**
+     * Sets calendarView to current month
+     */
+
   $scope.viewDate = new Date(moment());
 
   //gets month and converts it to a string using monthNames array
@@ -35,11 +39,16 @@ app.controller('userCal', ['$scope','moment', 'calendarConfig', 'eventServe', '$
     $location.path('/userEvent/' + event._id)
   };
 
-
+    /**
+     * Uses moment() to create awareness within the calendar of the current date/time.
+     */
   $scope.thisMonth = function(){
     $scope.viewDate = $scope.now;
   };
-
+    /**
+     * This function creates an empty array for events that occur after the current
+     * date so that they can be accessed to display on the Upcoming Events list.
+     */
   var getFutureEvents = function(events){
     var futureEvents = [];
     for (event of events){
